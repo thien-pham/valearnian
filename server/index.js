@@ -31,6 +31,7 @@ passport.use(
         // google id, and the access token
         // Job 2: Update this callback to either update or create the user
         // so it contains the correct access token
+
         const user = database[accessToken] = {
             googleId: profile.id,
             accessToken: accessToken
