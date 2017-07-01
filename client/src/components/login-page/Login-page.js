@@ -5,9 +5,10 @@ import Form from './Form';
 
 export default function LoginPage () {
   return (
-    <div className="login">
-    <ShowCase className="showcase" />
-    <Form className="form" />
+    <div>
+    <span className="login"><ShowCase className="showcase" />
+    <span><p>This is text</p><p>More text on same line</p></span>
+    <Form className="form" /></span>
     </div>
     );
 }

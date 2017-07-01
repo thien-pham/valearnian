@@ -3,6 +3,8 @@
   /*width: 100%;*/
   /*justify-content: center;*/
   /*flex-direction: row;*/
+  flex-wrap:  nowrap;
+  background-color: gray;
 }
 
 .showcase {
