@@ -1,0 +1,19 @@
+.form {
+  border: 1px solid black;
+  flex: 1;
+  margin: 10px;
+  width: 35%;
+  justify-content: space-around;
+  text-align: center;
+}
+
+
+input {
+  margin: 10px;
+  width: 90%;
+}
+
+button {
+  margin: 15px;
+  border-radius: 20px;
+}

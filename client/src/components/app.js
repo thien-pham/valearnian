@@ -2,7 +2,7 @@ import React from 'react';
 import * as Cookies from 'js-cookie';
 
 import QuestionPage from './question-page';
-import LoginPage from './login-page';
+import LoginPage from './login-page/Login-page';
 
 class App extends React.Component {
   constructor(props) {

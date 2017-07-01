@@ -1,0 +1,16 @@
+.login {
+  display: flex;
+  /*width: 100%;*/
+  /*justify-content: center;*/
+  /*flex-direction: row;*/
+}
+
+.showcase {
+  flex: 1;
+  flex-direction: row;
+}
+
+.form {
+  flex: 1;
+  flex-direction: row;
+}
