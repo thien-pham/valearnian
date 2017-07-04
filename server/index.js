@@ -9,7 +9,8 @@ const logger = require('morgan');
 // app.use(logger('combined'));rs
 //The user schema
 const User = require('./models');
-
+const mongoose = require('mongoose');
+const {SERVER} = require('./secret');
 //Router to authenticate
 const mainRoutes = require('./routes/main');
 app.use(mainRoutes);
@@ -27,11 +28,24 @@ app.post('/user', (req, res, next) => {
 });
 
 let server;
+// function runServer(port=3001) {
+//     return new Promise((resolve, reject) => {
+//         server = app.listen(port, () => {
+//             resolve();
+//         }).on('error', reject);
+//     });
+// }
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
-        server = app.listen(port, () => {
-            resolve();
-        }).on('error', reject);
+         mongoose.connect(SERVER, err => {
+            if(err) {
+              return reject(err);
+        }
+            console.log('Db connected');
+            server = app.listen(port, () => {
+                resolve();
+            }).on('error', reject);
+        });
     });
 }
 

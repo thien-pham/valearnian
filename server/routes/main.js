@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const User = require('../models');
 // const app = express();
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -15,15 +16,15 @@ if(process.env.NODE_ENV != 'production') {
 }
 // app.use(passport.initialize());
 // const questions = require('./routes/questions');
-mongoose.connect(secret.SERVER, err => {
-  if(err) {
-    console.log('Cannot connect');
-  } else {
-    console.log('---------------------');
-    console.log('connected to database');
-    console.log('---------------------');
-  }
-});
+// mongoose.connect(secret.SERVER, err => {
+//   if(err) {
+//     console.log('Cannot connect Cannot connect Cannot connect');
+//   } else {
+//     console.log('---------------------');
+//     console.log('connected to database');
+//     console.log('---------------------');
+//   }
+// });
 
 const database = {
 };
@@ -40,14 +41,49 @@ passport.use(
         // google id, and the access token
         // Job 2: Update this callback to either update or create the user
         // so it contains the correct access token
+        User.find({
+          googleId: profile.id
+        }, (err,user)=>{
+          if(!user.length){
+            User.create({
+              accessToken,
+              googleId: profile.id,
+              name: profile.displayName,
+            })
+            return cb(null,user)
+          }else {
+            return cb(null, user[0])
+          }
+        })
+        /*
         const user = database[accessToken] = {
             googleId: profile.id,
             accessToken: accessToken
         };
-        console.log(`This is the database:${JSON.stringify(database)}`);
-        console.log(`This is the profileId:${profile.id}`);
-        console.log(`This is the accessToken:${accessToken}`);
-        return cb(null, user);
+        User
+          .findOne({googleId: profile.id})
+          .exec()
+          .then(user => {
+            if(user){
+              return User
+              .findByIdAndUpdate(user.id, {
+                $set: {accessToken}}, {new: true})
+            }
+            return User.create({
+              googleId: profile.id,
+              accessToken: accessToken
+            })
+          })
+          .then(user => {
+            cb(null, {googleId: user.googleId , accessToken: user.accessToken});
+          })
+          .catch(err => console.error(err));
+          */
+        //The user is just an object with id token prop
+        // console.log(`This is the database:${JSON.stringify(database)}`);
+        // console.log(`This is the profileId:${profile.id}`);
+        // console.log(`This is the accessToken:${accessToken}`);
+        //return cb(null, user);
     }
 ));
 
@@ -57,10 +93,14 @@ passport.use(
             // Job 3: Update this callback to try to find a user with a
             // matching access token.  If they exist, let em in, if not,
             // don't.
-            if (!(token in database)) {
+            // return User.
+            User.find({accessToken:token}, function(err,user){
+              if(err) console.log(err);
+              if(!user.length) {
                 return done(null, false);
-            }
-            return done(null, database[token]);
+              }
+            return done(null, user[0]);
+            });
         }
     )
 );
@@ -72,6 +112,7 @@ router.get('/api/me',
         googleId: req.user.googleId
     })
 );
+//********** What does this do?
 router.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
