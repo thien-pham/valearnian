@@ -13,6 +13,18 @@ const userSchema = mongoose.Schema({
     points: {type: Number, required: false}
 })
 
+const questionSchema = new mongoose.Schema({
+    question: {
+        type: String,
+        required: true
+    },
+    answer: {
+        type: String,
+        required: true
+    }
+});
+
+const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
 
-module.exports = {User};
+module.exports = {User, Question};
