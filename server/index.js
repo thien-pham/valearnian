@@ -6,7 +6,7 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 const app = express();
 const logger = require('morgan');
-// app.use(logger('combined'));
+// app.use(logger('combined'));rs
 //The user schema
 const User = require('./models');
 

@@ -90,6 +90,8 @@ router.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json(['Question 1', 'Question 2', 'Question Three'])
 );
+router.get('/out', )
+
 router.get('/api/auth/logout', (req, res) => {
     req.logout();
     res.clearCookie('accessToken');
