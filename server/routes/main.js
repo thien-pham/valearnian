@@ -1,11 +1,13 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 // const app = express();
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET
+  CLIENT_SECRET: process.env.CLIENT_SECRET,
+  SERVER: process.env.SERVER
 };
 
 if(process.env.NODE_ENV != 'production') {
@@ -13,8 +15,18 @@ if(process.env.NODE_ENV != 'production') {
 }
 // app.use(passport.initialize());
 // const questions = require('./routes/questions');
+mongoose.connect(secret.SERVER, err => {
+  if(err) {
+    console.log('Cannot connect');
+  } else {
+    console.log('connected to database');
+  }
+});
+
 const database = {
 };
+
+//need a function to add data to database
 
 passport.use(
     new GoogleStrategy({
@@ -31,6 +43,9 @@ passport.use(
             googleId: profile.id,
             accessToken: accessToken
         };
+        console.log(`This is the userId:${JSON.stringify(user)}`);
+        console.log(`This is the profileId:${profile.id}`);
+        console.log(`This is the accessToken:${accessToken}`);
         return cb(null, user);
     }
 ));
