@@ -32,14 +32,13 @@ passport.use(
       // Job 2: Update this callback to either update or create the user
       // so it contains the correct access token
 
-      const user = (database[accessToken] = {
+      const user = database[accessToken] = {
         googleId: profile.id,
         accessToken: accessToken,
-      });
+      };
       return cb(null, user);
-    },
-  ),
-);
+    }
+));
 
 passport.use(
   new BearerStrategy((token, done) => {
@@ -50,13 +49,11 @@ passport.use(
       return done(null, false);
     }
     return done(null, database[token]);
-  }),
+  })
 );
 
-app.get(
-  '/api/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }),
-);
+app.get('/api/auth/google',
+  passport.authenticate('google', { scope: ['profile']}));
 
 app.get(
   '/api/auth/google/callback',
@@ -67,7 +64,7 @@ app.get(
   (req, res) => {
     res.cookie('accessToken', req.user.accessToken, { expires: 0 });
     res.redirect('/');
-  },
+  }
 );
 
 app.get('/api/auth/logout', (req, res) => {
@@ -76,19 +73,16 @@ app.get('/api/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.get(
-  '/api/me',
+app.get('/api/me',
   passport.authenticate('bearer', { session: false }),
-  (req, res) =>
-    res.json({
-      googleId: req.user.googleId,
-    }),
+  (req, res) => res.json({
+      googleId: req.user.googleId
+    })
 );
 
-app.get(
-  '/api/questions',
+app.get('/api/questions',
   passport.authenticate('bearer', { session: false }),
-  (req, res) => res.json(['Question 1', 'Question 2']),
+  (req, res) => res.json(['Question 1', 'Question 2'])
 );
 
 // Serve the built client

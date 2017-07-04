@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
+import {connect} from 'react-redux';
+import AnswerForm from '../answer-form/answer-form';
 
 export default class QuestionPage extends React.Component {
     constructor(props) {
@@ -33,9 +35,12 @@ export default class QuestionPage extends React.Component {
         );
 
         return (
+          <div>
             <ul className="question-list">
                 {questions}
             </ul>
+            <AnswerForm />
+          </div>
         );
     }
 }
