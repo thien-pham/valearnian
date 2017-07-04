@@ -43,7 +43,7 @@ passport.use(
             googleId: profile.id,
             accessToken: accessToken
         };
-        console.log(`This is the userId:${JSON.stringify(user)}`);
+        console.log(`This is the database:${JSON.stringify(database)}`);
         console.log(`This is the profileId:${profile.id}`);
         console.log(`This is the accessToken:${accessToken}`);
         return cb(null, user);
