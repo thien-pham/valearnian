@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+function createNode(data=null, next=null, prev=null) {
+  return {
+    data,
+    next,
+    prev
+  }
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +24,7 @@ function createNode(data=null, status=null, next=null, prev=null) {
     next,
     prev
   };
+>>>>>>> master
 }
 
 class Queue {
@@ -24,9 +33,14 @@ class Queue {
     this.last = null;
   }
 
+<<<<<<< HEAD
+  enqueue(data) {
+    const node = createNode(data);
+=======
   enqueue(data, status) {
     const node = createNode(data, status);
     console.log(node);
+>>>>>>> master
 
     if (this.last) {
       node.next = this.last;
@@ -36,6 +50,13 @@ class Queue {
     this.last = node;
 
     if (this.first === null) {
+<<<<<<< HEAD
+      this.first = node;
+    }
+  }
+
+  dequeue() {
+=======
       // console.log('This is the node enqueue node:', node);
       this.first = node;
     }
@@ -64,6 +85,7 @@ class Queue {
       // console.log('This is the correctly answered:', correct);
     }
 
+>>>>>>> master
     if (this.first === null) {
       return;
     }
@@ -78,17 +100,30 @@ class Queue {
     return node.data;
   }
 }
+<<<<<<< HEAD
+// valar, morghulis, sonaro, tubi, daor
+let questions = new Queue();
+
+questions.enqueue('valar');
+=======
 
 // valar, morghulis, sonaro, tubi, daor
 let questions = new Queue();
 let correct = new Queue();
 
 questions.enqueue('valar', true);
+>>>>>>> master
 questions.enqueue('morghulis');
 questions.enqueue('sonaro');
 questions.enqueue('tubi');
 questions.enqueue('daor');
 
+<<<<<<< HEAD
+
+
+questions.dequeue();
+console.log(questions);
+=======
 questions.dequeue();
 questions.dequeue();
 questions.dequeue();
@@ -99,3 +134,4 @@ console.log('This is the correct question queue:', correct);
 </script>
 </body>
 </html>
+>>>>>>> master

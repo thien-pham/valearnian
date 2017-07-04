@@ -1,25 +1,25 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 
-import QuestionPage from './question-page';
+import QuestionPage from './question-page/question-page';
 import LoginPage from './login-page/Login-page';
 
 class App extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
-      currentUser: null,
+      currentUser: null
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // Job 4: Redux-ify all of the state and fetch calls to async actions.
     const accessToken = Cookies.get('accessToken');
     if (accessToken) {
       fetch('/api/me', {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       })
         .then(res => {
           if (!res.ok) {
@@ -35,13 +35,13 @@ class App extends React.Component {
         })
         .then(currentUser =>
           this.setState({
-            currentUser,
+            currentUser
           }),
         );
     }
   }
 
-  render() {
+  render () {
     if (!this.state.currentUser) {
       return <LoginPage />;
     }

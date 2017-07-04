@@ -45,7 +45,30 @@ const userSchema = new mongoose.Schema({
 //   return bcrypt.compareSync(password, this.password);
 // };
 
-const User = mongoose.model('User', userSchema)
+const userSchema = mongoose.Schema({
+    googleId: {type: String, required: true},
+    accessToken: {type: String, required: true},
+    name: {type: String, required: false},
+    email: {type: String, required: false},
+    points: {type: Number, required: false}
+})
 
+const questionSchema = new mongoose.Schema({
+    question: {
+        type: String,
+        required: true
+    },
+    answer: {
+        type: String,
+        required: true
+    }
+});
+
+<<<<<<< HEAD
+const Question = mongoose.model('Questions', questionSchema);
+const User = mongoose.model('User', userSchema);
+=======
 module.exports = User;
+>>>>>>> master
 
+module.exports = {User, Question};

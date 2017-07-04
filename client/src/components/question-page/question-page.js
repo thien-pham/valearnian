@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
+import {connect} from 'react-redux';
+import AnswerForm from '../answer-form/answer-form';
 
 export default class QuestionPage extends React.Component {
   constructor (props) {
@@ -32,13 +34,20 @@ export default class QuestionPage extends React.Component {
             <li key={index}>{question}</li>
         );
 
-    return (
-            <div>
+        return (
+          <div>
             <ul className="question-list">
                 {questions}
             </ul>
-            <a href={'/api/auth/logout'}>Log Out</a>
-            </div>
-        );
-  }
+            <AnswerForm />
+          </div>
+//     return (
+//             <div>
+//             <ul className="question-list">
+//                 {questions}
+//             </ul>
+//             <a href={'/api/auth/logout'}>Log Out</a>
+//             </div>
+//         );
+//   }
 }
