@@ -1,19 +1,11 @@
 const path = require('path');
 const express = require('express');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const BearerStrategy = require('passport-http-bearer').Strategy;
-
-let secret = {
-  CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET,
-};
-
-if (process.env.NODE_ENV != 'production') {
-  secret = require('./secret');
-}
-
+// const passport = require('passporter);
+// const googlestrategy = require('passport-google-oauth20').strategy;
+// const bearerstrategy = require('passport-http-bearer').strategy;
+const jsonParser = require('body-parser').json();
 const app = express();
+<<<<<<< HEAD
 
 const database = {};
 
@@ -102,44 +94,67 @@ app.get('/api/questions',
   (req, res) => res.json(['Question 1', 'Question 2'])
 );
 
+=======
+const logger = require('morgan');
+// app.use(logger('combined'));rs
+//The user schema
+const User = require('./models');
+const mongoose = require('mongoose');
+const {SERVER} = require('./secret');
+//Router to authenticate
+const mainRoutes = require('./routes/main');
+app.use(mainRoutes);
+app.use(jsonParser);
+>>>>>>> master
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// Unhandled requests which aren't for the API should serve index.html so
-// client-side routing using browserHistory can function
-app.get(/^(?!\/api(\/|$))/, (req, res) => {
-  const index = path.resolve(__dirname, '../client/build', 'index.html');
-  res.sendFile(index);
+app.get('/', (req,res) => res.console.log('------------------yolo!----------------'));
+app.post('/user', (req, res, next) => {
+    const user = new User();
+    user.username = req.body.username;
+    user.password = req.body.password;
+    if(err) next(err);
+    res.json('Successfully created');
 });
 
 let server;
-function runServer(port = 3001) {
-  return new Promise((resolve, reject) => {
-    server = app
-      .listen(port, () => {
-        resolve();
-      })
-      .on('error', reject);
-  });
+// function runServer(port=3001) {
+//     return new Promise((resolve, reject) => {
+//         server = app.listen(port, () => {
+//             resolve();
+//         }).on('error', reject);
+//     });
+// }
+function runServer(port=3001) {
+    return new Promise((resolve, reject) => {
+         mongoose.connect(SERVER, err => {
+            if(err) {
+              return reject(err);
+        }
+            console.log('Db connected');
+            server = app.listen(port, () => {
+                resolve();
+            }).on('error', reject);
+        });
+    });
 }
 
 function closeServer() {
-  return new Promise((resolve, reject) => {
-    server.close(err => {
-      if (err) {
-        return reject(err);
-      }
-      resolve();
+    return new Promise((resolve, reject) => {
+        server.close(err => {
+            if (err) {
+                return reject(err);
+            }
+            resolve();
+        });
     });
-  });
 }
 
 if (require.main === module) {
-  runServer();
+    runServer();
 }
 
 module.exports = {
-  app,
-  runServer,
-  closeServer,
+    app, runServer, closeServer
 };
