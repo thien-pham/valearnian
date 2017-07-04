@@ -19,14 +19,15 @@ mongoose.connect(secret.SERVER, err => {
   if(err) {
     console.log('Cannot connect');
   } else {
+    console.log('---------------------');
     console.log('connected to database');
+    console.log('---------------------');
   }
 });
 
 const database = {
 };
 
-//need a function to add data to database
 
 passport.use(
     new GoogleStrategy({
@@ -90,7 +91,7 @@ router.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json(['Question 1', 'Question 2', 'Question Three'])
 );
-router.get('/out', )
+// router.get('/out', )
 
 router.get('/api/auth/logout', (req, res) => {
     req.logout();
