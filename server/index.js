@@ -32,11 +32,22 @@ passport.use(
       // Job 2: Update this callback to either update or create the user
       // so it contains the correct access token
 
-      const user = database[accessToken] = {
-        googleId: profile.id,
-        accessToken: accessToken,
-      };
-      return cb(null, user);
+      return User
+            .findOne({googleId: profile.id})
+            .exec()
+            .then(user => {
+                if (user) {
+                    return User.findByIdAndUpdate(user._id, {$set: {accessToken}}, {new: true})
+                }
+                return User.create({
+                    googleId: profile.id,
+                    accessToken,
+                    name: profile.displayName,
+                    username: profile.username,
+                })
+            })
+            .then(user => cb(null, {googleId: user.googleId, accessToken: user.accessToken}))
+            .catch(err => console.error(err))
     }
 ));
 
@@ -45,11 +56,17 @@ passport.use(
     // Job 3: Update this callback to try to find a user with a
     // matching access token.  If they exist, let em in, if not,
     // don't.
-    if (!(token in database)) {
-      return done(null, false);
-    }
-    return done(null, database[token]);
-  })
+    return User.findOne({accessToken: token})
+                .exec()
+                .then((user) => {
+                    if (!user) {
+                        return done(null, false);
+                    }
+                    return done(null, user);
+                })
+                .catch(err => console.error(err))
+        }
+    )
 );
 
 app.get('/api/auth/google',
