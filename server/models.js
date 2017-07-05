@@ -53,18 +53,19 @@ const userSchema = new mongoose.Schema({
 //     points: {type: Number, required: false}
 // });
 
-// const questionSchema = new mongoose.Schema({
-//     question: {
-//         type: String,
-//         required: true
-//     },
-//     answer: {
-//         type: String,
-//         required: true
-//     }
-// });
+const questionSchema = new mongoose.Schema({
+    question: {
+        type: String,
+        required: true
+    },
+    answer: {
+        type: String,
+        required: true
+    }
+});
 
 // const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
+const Question = mongoose.model('Question', questionSchema);
 
-module.exports = {User}//, Question};
+module.exports = {User, Question};

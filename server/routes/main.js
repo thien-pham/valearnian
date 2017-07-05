@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
-const { User } = require('../models');
+const { User, Question } = require('../models');
 // const app = express();
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -37,9 +37,9 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        console.log('---');
-        console.log(accessToken);
-        console.log('---');
+        // console.log('---');
+        // console.log(accessToken);
+        // console.log('---');
         User.find({
           googleId: profile.id
         }, (err, user) => {
@@ -97,7 +97,7 @@ passport.use(
               if(err) console.log(err);
               if(!user.length) {
                 return done(null, false);
-              }
+             }
             return done(null, user[0]);
             });
         }
@@ -129,17 +129,22 @@ router.get('/api/auth/google/callback',
 //render the questions
 router.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json(['Question 1', 'Question 2', 'Question Three'])
-);
-// router.get('/out', )
+
+    (req, res) => {
+        Question
+        .find()
+        .exec()
+        .then( question => {
+            res.json(question);
+        })
+        .catch(err => console.log(err));
+    });
 
 router.get('/api/auth/logout', (req, res) => {
     req.logout();
     res.clearCookie('accessToken');
     res.redirect('/');
 });
-
-
 
 // Unhandled requests which aren't for the API should serve index.html so
 // client-side routing using browserHistory can function
