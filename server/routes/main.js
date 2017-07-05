@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
-const User = require('../models');
+const { User } = require('../models');
 // const app = express();
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -37,18 +37,17 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        // Job 1: Set up Mongo/Mongoose, create a User model which store the
-        // google id, and the access token
-        // Job 2: Update this callback to either update or create the user
-        // so it contains the correct access token
+        console.log('---');
+        console.log(accessToken);
+        console.log('---');
         User.find({
           googleId: profile.id
-        }, (err,user)=>{
-          if(!user.length){
-            User.create({
-              accessToken,
-              googleId: profile.id,
-              name: profile.displayName,
+        }, (err, user) => {
+          if(!user.length) {
+        User.create({
+            accessToken: accessToken,
+            googleId: profile.id,
+            name: profile.displayName,
             })
             return cb(null,user)
           }else {
@@ -59,7 +58,7 @@ passport.use(
         const user = database[accessToken] = {
             googleId: profile.id,
             accessToken: accessToken
-        };
+        }
         User
           .findOne({googleId: profile.id})
           .exec()

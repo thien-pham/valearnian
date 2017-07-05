@@ -1,19 +1,19 @@
 import React from 'react';
 // import {connect} from 'react-redux';
 
-export class AnswerForm extends React.component {
-  constructor(props){
+export class AnswerForm extends React.Component {
+  constructor (props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  submitGuess(e) {
-        e.preventDefault();
-        const value = this.input.value;
+  submitGuess (e) {
+    e.preventDefault();
+        // const value = this.input.value;
         // this.props.dispatch(makeGuess(value));
-        this.form.reset();
+    this.form.reset();
   }
 
-  render() {
+  render () {
     return (
       <form onSubmit={e => this.submitGuess(e)}>
                 <input type="text" name="userGuess" id="userGuess"
@@ -21,6 +21,6 @@ export class AnswerForm extends React.component {
                     ref={input => this.input = input} />
                 <button type="submit">Submit</button>
       </form>
-    )
+    );
   }
 }
