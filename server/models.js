@@ -20,8 +20,13 @@ const userSchema = new mongoose.Schema({
   accessToken: {
     type: String,
     required: true
+  },
+  points: {
+    type: Number,
+    required: false
   }
 });
+
  // Job 1: Set up Mongo/Mongoose, create a User model which store the
         // google id, and the access token
         // Job 2: Update this callback to either update or create the user
@@ -45,13 +50,6 @@ const userSchema = new mongoose.Schema({
 //   return bcrypt.compareSync(password, this.password);
 // };
 
-const userSchema = mongoose.Schema({
-    googleId: {type: String, required: true},
-    accessToken: {type: String, required: true},
-    name: {type: String, required: false},
-    email: {type: String, required: false},
-    points: {type: Number, required: false}
-})
 
 const questionSchema = new mongoose.Schema({
     question: {
@@ -64,11 +62,8 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-<<<<<<< HEAD
+
 const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
-=======
-module.exports = User;
->>>>>>> master
 
 module.exports = {User, Question};
