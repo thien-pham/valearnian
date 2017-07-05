@@ -1,11 +1,11 @@
 import React from 'react';
 // import {connect} from 'react-redux';
 
-export default class AnswerForm extends React.component {
-  // constructor(props){
-  //   super(props);
-  //   this.onSubmit = this.onSubmit.bind(this);
-  // }
+export default class AnswerForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
   submitGuess(e) {
         e.preventDefault();
         const value = this.input.value;

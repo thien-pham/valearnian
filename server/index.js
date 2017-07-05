@@ -6,7 +6,7 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 const app = express();
 const logger = require('morgan');
-// app.use(logger('combined'));rs
+app.use(logger('combined'));
 //The user schema
 const User = require('./models');
 const mongoose = require('mongoose');
@@ -18,14 +18,14 @@ app.use(jsonParser);
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get('/', (req,res) => res.console.log('------------------yolo!----------------'));
-app.post('/user', (req, res, next) => {
-    const user = new User();
-    user.username = req.body.username;
-    user.password = req.body.password;
-    if(err) next(err);
-    res.json('Successfully created');
-});
+// app.get('/', (req,res) => res.console.log('------------------yolo!----------------'));
+// app.post('/user', (req, res, next) => {
+//     const user = new User();
+//     user.username = req.body.username;
+//     user.password = req.body.password;
+//     if(err) next(err);
+//     res.json('Successfully created');
+// });
 
 let server;
 // function runServer(port=3001) {

@@ -41,7 +41,7 @@ export default class QuestionPage extends React.Component {
             </ul>
             <AnswerForm />
           </div>
-        )
+        );
 //     return (
 //             <div>
 //             <ul className="question-list">

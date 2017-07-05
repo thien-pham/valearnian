@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 //   password: String
 // });
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
   googleId: {
     type: String,
     required: true
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
 // };
 
 
-const questionSchema = new mongoose.Schema({
+const questionSchema = mongoose.Schema({
     question: {
         type: String,
         required: true
@@ -62,8 +62,7 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-
-const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
+const Question = mongoose.model('Questions', questionSchema);
 
 module.exports = {User, Question};
