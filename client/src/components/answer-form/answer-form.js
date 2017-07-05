@@ -1,7 +1,7 @@
 import React from 'react';
-// import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-export default class AnswerForm extends React.Component {
+export class AnswerForm extends React.Component {
   // constructor (props) {
   //   super(props);
   //   // this.onSubmit = this.onSubmit.bind(this);
@@ -25,3 +25,9 @@ export default class AnswerForm extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  guesses: state.guesses
+});
+
+export default connect(mapStateToProps)(AnswerForm);

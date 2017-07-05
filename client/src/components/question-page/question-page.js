@@ -1,15 +1,15 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import AnswerForm from '../answer-form/answer-form';
 
-export default class QuestionPage extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      questions: []
-    };
-  }
+export class QuestionPage extends React.Component {
+  // constructor (props) {
+  //   super(props);
+  //   this.state = {
+  //     questions: []
+  //   };
+  // }
 
   componentDidMount () {
     const accessToken = Cookies.get('accessToken');
@@ -45,3 +45,9 @@ export default class QuestionPage extends React.Component {
         );
   }
 }
+
+const mapStateToProps = (state) => ({
+  questions: state.questions
+});
+
+export default connect(mapStateToProps)(QuestionPage);
