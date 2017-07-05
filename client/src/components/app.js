@@ -45,8 +45,9 @@ class App extends React.Component {
     if (!this.state.currentUser) {
       return <LoginPage />;
     }
-
-    return <QuestionPage />;
+    return (<div>
+    <QuestionPage />
+    </div>);
   }
 }
 

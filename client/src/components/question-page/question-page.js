@@ -19,8 +19,8 @@ export default class QuestionPage extends React.Component {
       }
     }).then(res => {
       if (!res.ok) {
-          throw new Error(res.statusText);
-        }
+        throw new Error(res.statusText);
+      }
       return res.json();
     }).then(questions =>
             this.setState({
@@ -40,15 +40,8 @@ export default class QuestionPage extends React.Component {
                 {questions}
             </ul>
             <AnswerForm />
+            <a href={'/api/auth/logout'}>Log Out</a>
           </div>
         );
-//     return (
-//             <div>
-//             <ul className="question-list">
-//                 {questions}
-//             </ul>
-//             <a href={'/api/auth/logout'}>Log Out</a>
-//             </div>
-//         );
   }
 }
