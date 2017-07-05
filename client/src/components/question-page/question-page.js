@@ -39,8 +39,7 @@ export class QuestionPage extends React.Component {
 
 
   render () {
-    let { questions } = this.props;
-    console.log('RS', questions);
+    console.log(this.props.questions);
     // const questions = this.props.questions.map((question, index) => {
     //   return (<li key={index}>{question}</li>);
     // }
@@ -51,7 +50,7 @@ export class QuestionPage extends React.Component {
           <div>
 
             <ul className="question-list">
-              <li>{this.props.questions[0].question}</li>
+              {/*<li>{this.props.questions[0].question}</li>*/}
             </ul>
             <AnswerForm />
             <a href={'/api/auth/logout'}>Log Out</a>
