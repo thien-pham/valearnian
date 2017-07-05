@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
+// const bcrypt = require('bcrypt-nodejs');
 
 // const userSchema = mongoose.Schema({
 //   // googleId: '',
@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt-nodejs');
 //   password: String
 // });
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
     required: true
@@ -20,13 +20,8 @@ const userSchema = mongoose.Schema({
   accessToken: {
     type: String,
     required: true
-  },
-  points: {
-    type: Number,
-    required: false
   }
 });
-
  // Job 1: Set up Mongo/Mongoose, create a User model which store the
         // google id, and the access token
         // Job 2: Update this callback to either update or create the user
@@ -50,19 +45,26 @@ const userSchema = mongoose.Schema({
 //   return bcrypt.compareSync(password, this.password);
 // };
 
+// const userSchema = mongoose.Schema({
+//     googleId: {type: String, required: true},
+//     accessToken: {type: String, required: true},
+//     name: {type: String, required: false},
+//     email: {type: String, required: false},
+//     points: {type: Number, required: false}
+// });
 
-const questionSchema = mongoose.Schema({
-    question: {
-        type: String,
-        required: true
-    },
-    answer: {
-        type: String,
-        required: true
-    }
-});
+// const questionSchema = new mongoose.Schema({
+//     question: {
+//         type: String,
+//         required: true
+//     },
+//     answer: {
+//         type: String,
+//         required: true
+//     }
+// });
 
+// const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
-const Question = mongoose.model('Questions', questionSchema);
 
-module.exports = {User, Question};
+module.exports = {User}//, Question};
