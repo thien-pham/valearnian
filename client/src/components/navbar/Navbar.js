@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-export default class NavBar extends Component {
+export class Navbar extends Component {
   render () {
     return (
-      <div className={'container'}>
-        <Navbar className={'navbar navbar-inverse'}/>
+      <nav className={'navbar navbar-inverse'} >
+        <div className={'container'}>
+          <div className={'navbar-header'} />
+        </div>
         <form className={'navbar-form navbar-right'}>
-            <div className={'form-group'}>
-              <input type={'text'} placeholder={'Score'} className={'form-control'} />
-            </div>
-          </form>
-      </div>
+          <div className={'form-group'}>
+            <h3><span className={'label label-primary'}>Question</span></h3>
+          </div>
+          <div className={'form-group'}>
+            <h3><span className={'label label-success'}>Score</span></h3>
+          </div>
+        </form>
+      </nav>
     );
   }
 }
 
 
-// const mapStateToProps = (state) => ({
-//     score
-// });
-// export default connect(mapStateToProps)(Navbar);
+const mapStateToProps = (state) => ({
+  score: state.score,
+  questionNumber: state.questionNumber
+});
+
+export default connect(mapStateToProps)(Navbar);
