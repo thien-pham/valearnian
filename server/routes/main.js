@@ -5,6 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const { User, Question } = require('../models');
 // const app = express();
+
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET,
@@ -14,21 +15,9 @@ let secret = {
 if(process.env.NODE_ENV != 'production') {
   secret = require('../secret2');
 }
-// app.use(passport.initialize());
-// const questions = require('./routes/questions');
-// mongoose.connect(secret.SERVER, err => {
-//   if(err) {
-//     console.log('Cannot connect Cannot connect Cannot connect');
-//   } else {
-//     console.log('---------------------');
-//     console.log('connected to database');
-//     console.log('---------------------');
-//   }
-// });
 
 const database = {
 };
-
 
 passport.use(
     new GoogleStrategy({
@@ -37,9 +26,6 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        // console.log('---');
-        // console.log(accessToken);
-        // console.log('---');
         User.find({
           googleId: profile.id
         }, (err, user) => {
@@ -89,10 +75,6 @@ passport.use(
 passport.use(
     new BearerStrategy(
         (token, done) => {
-            // Job 3: Update this callback to try to find a user with a
-            // matching access token.  If they exist, let em in, if not,
-            // don't.
-            // return User.
             User.find({accessToken:token}, function(err,user){
               if(err) console.log(err);
               if(!user.length) {
@@ -104,14 +86,12 @@ passport.use(
     )
 );
 
-//This is the login page
 router.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
         googleId: req.user.googleId
     })
 );
-//********** What does this do?
 router.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
@@ -125,11 +105,8 @@ router.get('/api/auth/google/callback',
         res.redirect('/');
     }
 );
-//If successful login-----------------------------------
-//render the questions
 router.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-
     (req, res) => {
         Question
         .find()
@@ -148,6 +125,7 @@ router.get('/api/auth/logout', (req, res) => {
 
 // Unhandled requests which aren't for the API should serve index.html so
 // client-side routing using browserHistory can function
+
 router.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);

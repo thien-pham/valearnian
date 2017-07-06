@@ -14,6 +14,11 @@ export const CREATE_USER = 'CREATE_USER';
 export const createUser = (currentUser) => ({
   type: CREATE_USER, currentUser });
 
+export const MAKE_GUESS = 'MAKE_GUESS';
+export const makeGuess = (guess) => ({
+    type: MAKE_GUESS,
+    guess });
+
 import * as Cookies from 'js-cookie';
 // export const fetchQuestion = (userId, accessToken) => {
 //   return dispatch => {
@@ -44,4 +49,5 @@ export const fetchQuestion = () => dispatch => {
       }).then(response => {
         return dispatch(fetchQuestionSuccess(response));
       });
+
 };

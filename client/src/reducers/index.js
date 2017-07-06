@@ -2,7 +2,8 @@ import {
   FETCH_QUESTION_REQUEST,
   FETCH_QUESTION_SUCCESS,
   FETCH_QUESTION_FAILURE,
-  CREATE_USER
+  CREATE_USER,
+  MAKE_GUESS
 } from '../actions';
 
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
   currentUser: null,
   loading: false,
   error: null,
-  guesses: '',
+  guesses: [],
   score: 0
 };
 
@@ -26,16 +27,34 @@ const reducer = (state = initialState, action) => {
       loading: false,
       error: true
     });
-  case FETCH_QUESTION_SUCCESS:
-    return Object.assign({}, state, {
-      loading: false,
-      error: null,
-      questions: action.questions
-    });
+    case FETCH_QUESTION_SUCCESS:
+        return Object.assign({}, state, {
+          loading: false,
+          error: null,
+          questions: action.questions
+        });
+  // case FETCH_QUESTION_SUCCESS:
+  //   let q = [];
+  //   let a = [];
+  //   for (let i=0; i<action.questions.length; i++) {
+  //     q.push(action.questions[i].question);
+  //     a.push(action.questions[i].answer);
+  //   }
+  //   return Object.assign({}, state, {
+  //     loading: false,
+  //     error: null,
+  //     questions: q,
+  //     answers: a
+  //   });
   case CREATE_USER:
     return {
       ...state,
       currentUser: action.currentUser
+    };
+  case MAKE_GUESS:
+    return {
+      ...state,
+      guesses: state.guesses.concat(action.guess)
     };
   default:
     return state;
