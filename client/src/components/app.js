@@ -33,13 +33,7 @@ class App extends React.Component {
           return res.json();
         })
         .then(currentUser =>
-<<<<<<< HEAD
-          this.setState({
-            currentUser
-          })
-=======
           this.props.dispatch(createUser(currentUser))
->>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
         );
     }
   }
@@ -48,13 +42,7 @@ class App extends React.Component {
     if (!this.props.currentUser) {
       return <LoginPage />;
     }
-<<<<<<< HEAD
     return <QuestionPage />;
-=======
-    return (<div>
-    <QuestionPage />
-    </div>);
->>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
   }
 }
 

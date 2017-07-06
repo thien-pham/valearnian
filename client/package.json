@@ -16,10 +16,7 @@
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
-<<<<<<< HEAD
-=======
     "redux-devtools-extension": "^2.13.2",
->>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   },

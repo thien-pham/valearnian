@@ -10,7 +10,3 @@ export default function LoginPage () {
     </div>
     );
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343

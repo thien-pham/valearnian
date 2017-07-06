@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-<<<<<<< HEAD
-export default class AnswerForm extends React.Component {
-=======
 export class AnswerForm extends React.Component {
->>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
   // constructor (props) {
   //   super(props);
   //   // this.onSubmit = this.onSubmit.bind(this);
