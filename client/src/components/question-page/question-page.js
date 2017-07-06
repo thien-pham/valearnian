@@ -15,6 +15,8 @@ export class QuestionPage extends React.Component {
 
   componentWillMount () {
     this.props.dispatch(fetchQuestion());
+    // this.props.dispatch(score());
+    // this.props.dispatch(currentQuestion());
     // const accessToken = Cookies.get('accessToken');
     // fetch('/api/questions', {
     //   headers: {
@@ -61,7 +63,6 @@ export class QuestionPage extends React.Component {
               {this.lister()}
             </ul>
             <AnswerForm />
-            <a href={'/api/auth/logout'}>Log Out</a>
           </div>
     );
   }
