@@ -15,6 +15,10 @@ export const FETCH_SCORE = 'FETCH_SCORE';
 export const fetchScore = () => ({
   type: FETCH_SCORE });
 
+export const FETCH_INDEX = 'FETCH_INDEX';
+export const fetchIndex = () => ({
+  type: FETCH_INDEX });
+
 export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
 export const fetchQuestionNumber = () => ({
   type: FETCH_QUESTION_NUMBER });
@@ -42,7 +46,7 @@ export const dequeue = () => ({
 
 export const REQUEUE = 'REQUEUE';
 export const requeue = () => ({
-  type: DEQUEUE });
+  type: REQUEUE });
 
 export const FILL_UP_QUEUE = 'FILL_UP_QUEUE';
 export const fillUpQueue = () => ({

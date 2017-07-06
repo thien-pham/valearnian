@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AnswerForm from '../answer-form/answer-form';
 import Navbar from '../navbar/Navbar';
 import { fetchQuestion, fillUpQueue } from '../../actions';
+
 export class QuestionPage extends React.Component {
   // constructor (props) {
   //   super(props);
@@ -30,26 +31,26 @@ export class QuestionPage extends React.Component {
   //     return <li key={i}>{val.question}</li>;
   //   });
   // }
-  populateQuestions (e) {
-    e.preventDefault();
-    this.props.dispatch(fillUpQueue());
-    return;
-  }
+  // populateQuestions (e) {
+  //   e.preventDefault();
+  //   this.props.dispatch(fillUpQueue());
+  //   return;
+  // }
 
   render () {
     const questions = this.props.questions.map((val, index) => {
-      this.props.dispatch(fillUpQueue(val.question));
+      console.log(val);
+      // return this.props.dispatch(fillUpQueue(val.question));
       return (<li key={index}>{val.question}</li>);
-    }
-        );
+    });
 
     return (
           <div>
-         {/*<button onClick={this.bind.populateQuestions(this)} />*/}
+        {/*<button onClick={this.bind.populateQuestions(this)} />*/}
             <Navbar />
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
-              {questions[0]}
+              {this.props.questions[questionIndex]}
             </ul>
             <AnswerForm />
           </div>
@@ -60,7 +61,8 @@ export class QuestionPage extends React.Component {
 const mapStateToProps = (state) => ({
   questions: state.questions,
   queueA: state.queueA,
-  queueB: state.queueB
+  queueB: state.queueB,
+  questionIndex: state.questionIndex
 });
 
 export default connect(mapStateToProps)(QuestionPage);
