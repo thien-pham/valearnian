@@ -1,3 +1,4 @@
+import * as Cookies from 'js-cookie';
 export const FETCH_QUESTION_REQUEST = 'FETCH_QUESTION_REQUEST';
 export const fetchQuestionRequest = () => ({
   type: FETCH_QUESTION_REQUEST });
@@ -24,10 +25,28 @@ export const createUser = (currentUser) => ({
 
 export const MAKE_GUESS = 'MAKE_GUESS';
 export const makeGuess = (guess) => ({
-    type: MAKE_GUESS,
-    guess });
+  type: MAKE_GUESS,
+  guess });
 
-import * as Cookies from 'js-cookie';
+export const INCREMENT_SCORE = 'INCREMENT_SCORE';
+export const incrementScore = () => ({
+  type: INCREMENT_SCORE });
+
+export const ENQUEUE = 'ENQUEUE';
+export const enqueue = () => ({
+  type: ENQUEUE });
+
+export const DEQUEUE = 'DEQUEUE';
+export const dequeue = () => ({
+  type: DEQUEUE });
+
+export const REQUEUE = 'REQUEUE';
+export const requeue = () => ({
+  type: DEQUEUE });
+
+export const FILL_UP_QUEUE = 'FILL_UP_QUEUE';
+export const fillUpQueue = () => ({
+  type: FILL_UP_QUEUE });
 
 export const score = () => dispatch => {
   dispatch(fetchScore);
@@ -53,5 +72,4 @@ export const fetchQuestion = () => dispatch => {
       }).then(response => {
         return dispatch(fetchQuestionSuccess(response));
       });
-
 };
