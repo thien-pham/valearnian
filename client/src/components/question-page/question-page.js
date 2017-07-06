@@ -1,16 +1,16 @@
 import React from 'react';
-import * as Cookies from 'js-cookie';
+// import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import AnswerForm from '../answer-form/answer-form';
 import { fetchQuestion } from '../../actions';
 export class QuestionPage extends React.Component {
-  constructor (props) {
-    super(props);
-    // this.state = {
-    //   questions: []
-    // };
-    // this.showQuestions = this.showQuestions.bind(this);
-  }
+  // constructor (props) {
+  //   super(props);
+  //   // this.state = {
+  //   //   questions: []
+  //   // };
+  //   // this.showQuestions = this.showQuestions.bind(this);
+  // }
 
   componentWillMount () {
     this.props.dispatch(fetchQuestion());
@@ -37,6 +37,12 @@ export class QuestionPage extends React.Component {
   //   });
   // }
 
+  lister() {
+    return this.props.questions.map((val,i)=>{
+      return <li key={i}>{val.question}</li>
+    });
+  }
+
 
   render () {
     console.log(this.props.questions);
@@ -51,6 +57,7 @@ export class QuestionPage extends React.Component {
 
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
+              {this.lister()}
             </ul>
             <AnswerForm />
             <a href={'/api/auth/logout'}>Log Out</a>

@@ -12,7 +12,7 @@ let secret = {
 };
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('../secret');
+  secret = require('../secret2');
 }
 // app.use(passport.initialize());
 // const questions = require('./routes/questions');

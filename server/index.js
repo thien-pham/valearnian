@@ -41,7 +41,7 @@ function runServer(port=3001) {
             if(err) {
               return reject(err);
         }
-            console.log('Db connected');
+            console.log('Db connected', port);
             server = app.listen(port, () => {
                 resolve();
             }).on('error', reject);
