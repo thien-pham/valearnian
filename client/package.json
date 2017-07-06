@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^7.1.0",
     "react-scripts": "0.9.0"
@@ -11,9 +12,14 @@
   "dependencies": {
     "js-cookie": "^2.1.3",
     "react": "^15.4.2",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
+<<<<<<< HEAD
+=======
+    "redux-devtools-extension": "^2.13.2",
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   },

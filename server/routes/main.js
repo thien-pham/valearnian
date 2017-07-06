@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+<<<<<<< HEAD
 const { User } = require('../models');
+=======
+const { User, Question } = require('../models');
+// const app = express();
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET,
@@ -11,7 +16,7 @@ let secret = {
 };
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('../secret');
+  secret = require('../secret2');
 }
 
 const database = {
@@ -24,6 +29,12 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
+<<<<<<< HEAD
+=======
+        // console.log('---');
+        // console.log(accessToken);
+        // console.log('---');
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
         User.find({
           googleId: profile.id
         }, (err, user) => {
@@ -38,6 +49,38 @@ passport.use(
             return cb(null, user[0])
           }
         })
+<<<<<<< HEAD
+=======
+        /*
+        const user = database[accessToken] = {
+            googleId: profile.id,
+            accessToken: accessToken
+        }
+        User
+          .findOne({googleId: profile.id})
+          .exec()
+          .then(user => {
+            if(user){
+              return User
+              .findByIdAndUpdate(user.id, {
+                $set: {accessToken}}, {new: true})
+            }
+            return User.create({
+              googleId: profile.id,
+              accessToken: accessToken
+            })
+          })
+          .then(user => {
+            cb(null, {googleId: user.googleId , accessToken: user.accessToken});
+          })
+          .catch(err => console.error(err));
+          */
+        //The user is just an object with id token prop
+        // console.log(`This is the database:${JSON.stringify(database)}`);
+        // console.log(`This is the profileId:${profile.id}`);
+        // console.log(`This is the accessToken:${accessToken}`);
+        //return cb(null, user);
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
     }
 ));
 
@@ -48,7 +91,7 @@ passport.use(
               if(err) console.log(err);
               if(!user.length) {
                 return done(null, false);
-              }
+             }
             return done(null, user[0]);
             });
         }
@@ -76,14 +119,33 @@ router.get('/api/auth/google/callback',
 );
 router.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
+<<<<<<< HEAD
     (req, res) => res.json(['Question 1', 'Question 2', 'Question Three'])
 );
+=======
+
+    (req, res) => {
+        Question
+        .find()
+        .exec()
+        .then( question => {
+            res.json(question);
+        })
+        .catch(err => console.log(err));
+    });
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
 
 router.get('/api/auth/logout', (req, res) => {
     req.logout();
     res.clearCookie('accessToken');
     res.redirect('/');
 });
+<<<<<<< HEAD
+=======
+
+// Unhandled requests which aren't for the API should serve index.html so
+// client-side routing using browserHistory can function
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
 router.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);

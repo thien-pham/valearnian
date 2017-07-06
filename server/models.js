@@ -66,5 +66,9 @@ const userSchema = new mongoose.Schema({
 
 // const Question = mongoose.model('Questions', questionSchema);
 const User = mongoose.model('User', userSchema);
+<<<<<<< HEAD
+=======
+const Question = mongoose.model('Question', questionSchema);
+>>>>>>> 6e966660be0cf1409fde9afc8243ce1cf33fb343
 
 module.exports = {User}//, Question};
