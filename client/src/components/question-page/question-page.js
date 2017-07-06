@@ -15,21 +15,6 @@ export class QuestionPage extends React.Component {
 
   componentWillMount () {
     this.props.dispatch(fetchQuestion());
-    // this.props.dispatch(score());
-    // this.props.dispatch(currentQuestion());
-    // const accessToken = Cookies.get('accessToken');
-    // fetch('/api/questions', {
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`
-    //   }
-    // }).then(res => {
-    //   if (!res.ok) {
-    //     throw new Error(res.statusText);
-    //   }
-    //   return res.json();
-    // }).then(question =>
-    //   this.props.dispatch(fetchQuestion(question))
-    //   );
   }
 
   // showQuestions () {
@@ -40,19 +25,19 @@ export class QuestionPage extends React.Component {
   //   });
   // }
 
-  lister () {
-    return this.props.questions.map((val, i) => {
-      return <li key={i}>{val.question}</li>;
-    });
-  }
+  // lister () {
+  //   return this.props.questions.map((val, i) => {
+  //     return <li key={i}>{val.question}</li>;
+  //   });
+  // }
 
 
   render () {
     console.log(this.props.questions);
-    // const questions = this.props.questions.map((question, index) => {
-    //   return (<li key={index}>{question}</li>);
-    // }
-    //     );
+    const questions = this.props.questions.map((val, index) => {
+      return (<li key={index}>{val.question}</li>);
+    }
+        );
 
 
     return (
@@ -60,7 +45,7 @@ export class QuestionPage extends React.Component {
             <Navbar />
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
-              {this.lister()}
+              {questions[0]}
             </ul>
             <AnswerForm />
           </div>
