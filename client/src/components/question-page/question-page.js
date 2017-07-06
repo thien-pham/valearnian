@@ -2,6 +2,7 @@ import React from 'react';
 // import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import AnswerForm from '../answer-form/answer-form';
+import Navbar from '../navbar/Navbar';
 import { fetchQuestion } from '../../actions';
 export class QuestionPage extends React.Component {
   // constructor (props) {
@@ -37,9 +38,9 @@ export class QuestionPage extends React.Component {
   //   });
   // }
 
-  lister() {
-    return this.props.questions.map((val,i)=>{
-      return <li key={i}>{val.question}</li>
+  lister () {
+    return this.props.questions.map((val, i) => {
+      return <li key={i}>{val.question}</li>;
     });
   }
 
@@ -54,7 +55,7 @@ export class QuestionPage extends React.Component {
 
     return (
           <div>
-
+            <Navbar />
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
               {this.lister()}
