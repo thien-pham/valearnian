@@ -3,7 +3,7 @@ import {
   FETCH_QUESTION_SUCCESS,
   FETCH_QUESTION_FAILURE,
   //FETCH_SCORE,
-  //FETCH_QUESTION_NUMBER,
+  FETCH_QUESTION_INDEX,
   CREATE_USER,
   MAKE_GUESS,
   INCREMENT_SCORE,
@@ -12,15 +12,15 @@ import {
   ENQUEUE,
   FILL_UP_QUEUE
 } from '../actions';
-import Queue from './algorithm';
+// import Queue from './algorithm';
 
 const initialState = {
   questions: [],
   currentUser: null,
   loading: false,
   error: null,
-  queueA: Queue.queueA,
-  queueB: Queue.queueB,
+  queueA: [],
+  queueB: [],
   questionCount: 1,
   questionIndex: 0,
   guesses: [],
@@ -84,26 +84,31 @@ const reducer = (state = initialState, action) => {
       ...state,
       score: state.score + 1
     };
-  case DEQUEUE:
+  case FETCH_QUESTION_INDEX:
     return {
       ...state,
-      queueA: Queue.queueA.dequeue()
+      score: state.questionIndex + 1
     };
-  case REQUEUE:
-    return {
-      ...state,
-      queueB: Queue.requeue(Queue.queueB, state.questions[state.questionIndex])
-    };
-  case ENQUEUE:
-    return {
-      ...state,
-      queueA: Queue.queueA.enqueue(state.questions[state.questionIndex])
-    };
-  case FILL_UP_QUEUE:
-    return {
-      ...state,
-      queueA: Queue.queueA.enqueue(state.questions[state.questionIndex])
-    };
+  // case DEQUEUE:
+  //   return {
+  //     ...state,
+  //     queueA: Queue.queueA.dequeue()
+  //   };
+  // case REQUEUE:
+  //   return {
+  //     ...state,
+  //     queueB: Queue.queueB
+  //   };
+  // case ENQUEUE:
+  //   return {
+  //     ...state,
+  //     queueA: Queue.queueA.enqueue(state.questions[state.questionIndex])
+  //   };
+  // case FILL_UP_QUEUE:
+  //   return {
+  //     ...state,
+  //     queueA: Queue.queueA.enqueue()
+  //   };
   default:
     return state;
   }
