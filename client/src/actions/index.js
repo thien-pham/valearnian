@@ -10,6 +10,14 @@ export const FETCH_QUESTION_FAILURE = 'FETCH_QUESTION_FAILURE';
 export const fetchQuestionFailure = () => ({
   type: FETCH_QUESTION_FAILURE });
 
+export const FETCH_SCORE = 'FETCH_SCORE';
+export const fetchScore = () => ({
+  type: FETCH_SCORE });
+
+export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
+export const fetchQuestionNumber = () => ({
+  type: FETCH_QUESTION_NUMBER });
+
 export const CREATE_USER = 'CREATE_USER';
 export const createUser = (currentUser) => ({
   type: CREATE_USER, currentUser });
@@ -20,18 +28,14 @@ export const makeGuess = (guess) => ({
     guess });
 
 import * as Cookies from 'js-cookie';
-// export const fetchQuestion = (userId, accessToken) => {
-//   return dispatch => {
-//     return fetch('/questions/' + userId + '?access_token=' + accessToken)
-//       .then(res => {
-//         return res.json();
-//       }).then(response => {
-//         return dispatch(fetchQuestionSuccess(response));
-//       }).catch(err => {
-//         return dispatch(fetchQuestionFailure(err));
-//       });
-//   };
-// };
+
+export const score = () => dispatch => {
+  dispatch(fetchScore);
+};
+
+export const questionNumber = () => dispatch => {
+  dispatch(fetchQuestionNumber);
+};
 
 export const fetchQuestion = () => dispatch => {
   dispatch(fetchQuestionRequest());

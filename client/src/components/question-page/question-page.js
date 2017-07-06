@@ -48,7 +48,6 @@ export class QuestionPage extends React.Component {
               {questions[0]}
             </ul>
             <AnswerForm />
-            <a href={'/api/auth/logout'}>Log Out</a>
           </div>
     );
   }

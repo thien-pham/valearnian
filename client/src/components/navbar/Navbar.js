@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { score, questionNumber } from '../../actions';
 
-export default class NavBar extends Component {
+export class Navbar extends Component {
+
+    // const questionNumber = this.props.dispatch.questionNumber();
+
   render () {
+    // const score = props.score;
     return (
-      <div className={'container'}>
-        <Navbar className={'navbar navbar-inverse'}/>
+      <nav className={'navbar navbar-inverse'} >
+        <div className={'container'}>
+          <div className={'navbar-header'} />
+        </div>
+        <form className={'navbar-form navbar-left'}>
+          <div className={'form-group'}>
+            <h3><span className={'label label-primary'}>{this.props.questionNumber}</span></h3>
+          </div>
+          <div className={'form-group'}>
+            <h3><span className={'label label-success'}>{this.props.score}</span></h3>
+          </div>
+        </form>
         <form className={'navbar-form navbar-right'}>
-            <div className={'form-group'}>
-              <input type={'text'} placeholder={'Score'} className={'form-control'} />
-            </div>
+          <div className={'form-group'}>
+            <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
+          </div>
           </form>
-      </div>
+          <p>This is the score: {this.props.score}</p>
+      </nav>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  score: state.score,
+  questionNumber: state.questionNumber
+});
 
-// const mapStateToProps = (state) => ({
-//     score
-// });
-// export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(Navbar);
