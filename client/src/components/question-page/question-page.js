@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AnswerForm from '../answer-form/answer-form';
 import Navbar from '../navbar/Navbar';
-import { fetchQuestion } from '../../actions';
+import { fetchQuestion, fillUpQueue } from '../../actions';
 export class QuestionPage extends React.Component {
   // constructor (props) {
   //   super(props);
@@ -30,18 +30,22 @@ export class QuestionPage extends React.Component {
   //     return <li key={i}>{val.question}</li>;
   //   });
   // }
-
+  populateQuestions (e) {
+    e.preventDefault();
+    this.props.dispatch(fillUpQueue());
+    return;
+  }
 
   render () {
-    console.log(this.props.questions);
     const questions = this.props.questions.map((val, index) => {
+      this.props.dispatch(fillUpQueue(val.question));
       return (<li key={index}>{val.question}</li>);
     }
         );
 
-
     return (
           <div>
+         {/*<button onClick={this.bind.populateQuestions(this)} />*/}
             <Navbar />
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
@@ -54,7 +58,9 @@ export class QuestionPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.questions
+  questions: state.questions,
+  queueA: state.queueA,
+  queueB: state.queueB
 });
 
 export default connect(mapStateToProps)(QuestionPage);

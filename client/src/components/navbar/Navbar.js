@@ -15,10 +15,10 @@ export class Navbar extends Component {
         </div>
         <form className={'navbar-form navbar-left'}>
           <div className={'form-group'}>
-            <h3><span className={'label label-primary'}>{this.props.questionNumber}</span></h3>
+            <h3><span className={'label label-primary'}>Question #{this.props.questionNumber}</span></h3>
           </div>
           <div className={'form-group'}>
-            <h3><span className={'label label-success'}>{this.props.score}</span></h3>
+            <h3><span className={'label label-success'}>Score: {this.props.score}</span></h3>
           </div>
         </form>
         <form className={'navbar-form navbar-right'}>
@@ -26,7 +26,6 @@ export class Navbar extends Component {
             <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
           </div>
           </form>
-          <p>This is the score: {this.props.score}</p>
       </nav>
     );
   }
