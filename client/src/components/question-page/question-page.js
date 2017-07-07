@@ -95,12 +95,12 @@
 // export default connect(mapStateToProps)(QuestionPage);
 
 import React from 'react';
-// import * as Cookies from 'js-cookie';
+import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 // import AnswerForm from '../answer-form/answer-form';
 import Navbar from '../navbar/Navbar';
 import QuestionsQueue from './questions-queue';
-import { fetchQuestion, fetchQuestionIndex, makeGuess, incrementScore } from '../../actions';
+import { fetchQuestion, fetchQuestionIndex, makeGuess, incrementScore, newGame, incrementQuestion } from '../../actions';
 import './question-page.css'
 
 export class QuestionPage extends React.Component {
@@ -114,12 +114,32 @@ export class QuestionPage extends React.Component {
       qIndex: 0,
       flag: false,
       flag2: false,
-      qCurrentQuestion: ''
+      qCurrentQuestion: '',
+      name: null
     };
   }
 
   componentWillMount () {
     this.props.dispatch(fetchQuestion());
+  }
+
+  componentDidMount() {
+      const accessToken = Cookies.get('accessToken');
+      fetch('/api/me', {
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`
+              }
+          }).then(res => {
+          if (!res.ok) {
+              throw new Error(res.statusText);
+          }
+          return res.json();
+      }).then((user) => {
+          this.setState({
+              name: user.name
+          })
+        }
+      );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -133,9 +153,11 @@ export class QuestionPage extends React.Component {
       }
     }
 //create a function
-updateQuestionQIndex(){
-  this.setState({})
-}
+    newGame(event) {
+        event.preventDefault();
+        this.props.dispatch(newGame());
+    }
+
     submitGuess (e) {
       e.preventDefault();
       let status = 'Submit';
@@ -159,7 +181,7 @@ updateQuestionQIndex(){
       //   console.log(this.state.questionsQueue[this.state.qIndex])
       //   this.setState({qIndex: this.state.qIndex+1});
       // }
-
+      this.props.dispatch(incrementQuestion());
       if (value === question.answer) {
         console.log(value, question.answer);
         //increment score
@@ -193,6 +215,21 @@ updateQuestionQIndex(){
         this.state.questionsQueue.push(this.props.questions[i]);
       }
     }
+    if (this.state.index === this.props.questions.length - 1) {
+      return <div className = "restartMsg">
+        <div className = "card" >
+          <img className = "image" src={require('./dragons.jpg')} width = '150'/>
+          <div className="container2">
+            <h4>Daoruni gimi, <strike>Ionos Sonaro</strike> {this.state.name}.</h4>
+            {/* <button className="newGame" type="submit"
+              onClick={e => this.newGame(e)}>New Game?</button> */}
+            {/* <button onClick={'/api/auth/logout'}>logout</button> */}
+            <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
+        </div>
+      </div>
+    </div>
+
+    }
     console.log('APPSTATE', this.state.questionsQueue)
     const questions = this.props.questions.map((val, index) => {
       // return this.props.dispatch(fillUpQueue(val.question));
@@ -204,6 +241,7 @@ updateQuestionQIndex(){
           <div>
         {/*<button onClick={this.bind.populateQuestions(this)} />*/}
             <Navbar />
+
             <ul className="question-list">
               {/*<li>{this.props.questions[0].question}</li>*/}
 
@@ -226,7 +264,7 @@ updateQuestionQIndex(){
                   className="text" placeholder="The meaning is..." required
                   ref={input => this.input = input} />
               <button className="submit" type="submit" >{status}</button>
-            </form>
+            </form>}
           </div>
     );
   }

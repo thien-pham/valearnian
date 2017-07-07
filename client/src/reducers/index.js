@@ -11,7 +11,8 @@ import {
   // DEQUEUE,
   // REQUEUE,
   // ENQUEUE,
-  FILL_UP_QUEUE
+  FILL_UP_QUEUE,
+  NEW_GAME
 } from '../actions';
 // import Queue from './algorithm';
 
@@ -116,6 +117,10 @@ const reducer = (state = initialState, action) => {
         questions: action.array
       }
     ];
+  case NEW_GAME:
+    return {
+      ...state
+      };
   default:
     return state;
   }

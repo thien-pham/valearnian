@@ -6,6 +6,15 @@
 li {
   list-style: none;
 }
+.restartMsg {
+  position: fixed;
+width: 500px;
+height: 200px;
+top: 50%;
+left: 50%;
+margin-top: -200px; 
+margin-left: -250px;
+}
 
 .card {
   margin: 0 auto;

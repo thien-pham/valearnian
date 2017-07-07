@@ -66,6 +66,11 @@ export const questionNumber = () => dispatch => {
   dispatch(fetchQuestionNumber);
 };
 
+export const NEW_GAME = 'NEW_GAME';
+export const newGame = () => ({
+    type: NEW_GAME
+});
+
 export const fetchQuestion = () => dispatch => {
   dispatch(fetchQuestionRequest());
   const accessToken = Cookies.get('accessToken');
