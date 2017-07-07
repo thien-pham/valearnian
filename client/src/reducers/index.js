@@ -119,7 +119,7 @@ const reducer = (state = initialState, action) => {
     ];
   case NEW_GAME:
     return {
-      ...state
+      initialState
       };
   default:
     return state;

@@ -62,6 +62,7 @@ export class QuestionPage extends React.Component {
     newGame(event) {
         event.preventDefault();
         this.props.dispatch(newGame());
+        this.props.dispatch(fetchQuestion());
     }
 
     submitGuess (e) {
@@ -130,8 +131,8 @@ export class QuestionPage extends React.Component {
           <img className = "image" src={require('./dragons.jpg')} width = '150'/>
           <div className="container2">
             <h4>Daoruni gimi, <strike>Ionos Sonaro</strike> {this.state.name}.</h4>
-            {/* <button className="newGame" type="submit"
-              onClick={e => this.newGame(e)}>New Game?</button> */}
+            <button className="newGame" type="submit"
+              onClick={e => this.newGame(e)}>New Game?</button>
             {/* <button onClick={'/api/auth/logout'}>logout</button> */}
             <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
         </div>
