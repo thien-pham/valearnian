@@ -17,6 +17,7 @@ export class Navbar extends Component {
       points = 'pts';
     }
     return (
+
       <nav className={'navbar navbar-inverse'} >
         <div className={'container'}>
           <div className={'navbar-header'} />
@@ -32,15 +33,20 @@ export class Navbar extends Component {
         </form>
         <form className={'navbar-form navbar-right logout'}>
           <div className={'form-group'}>
-            <UserInfo />
             <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
           </div>
           </form>
       </nav>
+
     );
   }
 }
-
+{/* <ul>
+  <li className="main-nav-link">Question #{this.props.questionCount}</li>
+  <li className="main-nav-link">Score: {this.props.score} {points}</li>
+  <li className="main-nav-link"><div className="profile"><UserInfo /></div></li>
+  <li className="main-nav-link"><a href={'/api/auth/logout'}>{'logout'}</a></li>
+</ul> */}
 const mapStateToProps = (state) => ({
   score: state.score,
   questionCount: state.questionCount

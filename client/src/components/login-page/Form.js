@@ -9,7 +9,7 @@ export default class Form extends Component {
         <img src={Logo} height='450px'/>
       <div className="loginForm">
         <form>
-          <a href="https://fontmeme.com/game-of-thrones-font/"><img src="https://fontmeme.com/permalink/170707/ba6c0e8707d0a9dc598d3d25289b27f2.png" alt="game-of-thrones-font" border="0" /></a>
+          <a href="https://fontmeme.com/game-of-thrones-font/"><img src="https://fontmeme.com/permalink/170707/ba6c0e8707d0a9dc598d3d25289b27f2.png" alt="game-of-thrones-font" /></a>
 
           <a href={'/api/auth/google'}>Log in with Google to learn Valerian through Spaced Repetition.</a>
           <hr />
