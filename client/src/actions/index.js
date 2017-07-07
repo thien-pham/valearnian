@@ -15,9 +15,9 @@ export const FETCH_SCORE = 'FETCH_SCORE';
 export const fetchScore = () => ({
   type: FETCH_SCORE });
 
-export const FETCH_INDEX = 'FETCH_INDEX';
-export const fetchIndex = () => ({
-  type: FETCH_INDEX });
+export const FETCH_QUESTION_INDEX = 'FETCH_QUESTION_INDEX';
+export const fetchQuestionIndex = () => ({
+  type: FETCH_QUESTION_INDEX });
 
 export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
 export const fetchQuestionNumber = () => ({
