@@ -29,7 +29,7 @@ export default class UserInfo extends React.Component {
     }
 
     render() {
-        console.log('USERNAME', this.state.name);
+        // console.log('USERNAME', this.state.name);
         return (
                 <h3>{this.state.name}</h3>
         );
