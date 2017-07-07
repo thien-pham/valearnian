@@ -35,7 +35,7 @@ passport.use(
             googleId: profile.id,
             name: profile.displayName,
             })
-            return cb(null,user)
+            return cb(null, user)
           }else {
             return cb(null, user[0])
           }
@@ -89,7 +89,8 @@ passport.use(
 router.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
-        googleId: req.user.googleId
+        googleId: req.user.googleId,
+        name: req.user.name
     })
 );
 router.get('/api/auth/google',
