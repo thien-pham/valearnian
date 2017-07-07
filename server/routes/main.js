@@ -13,7 +13,7 @@ let secret = {
 };
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('../secret2');
+  secret = require('../secret');
 }
 
 const database = {

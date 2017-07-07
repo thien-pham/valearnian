@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
   case FETCH_QUESTION_INDEX:
     return {
       ...state,
-      score: state.questionIndex + 1
+      questionIndex: state.questionIndex + 1
     };
   // case DEQUEUE:
   //   return {
