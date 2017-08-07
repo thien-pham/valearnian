@@ -76,6 +76,7 @@ passport.use(
     new BearerStrategy(
         (token, done) => {
             User.find({accessToken:token}, function(err,user){
+              console.log('USER', user);
               if(err) console.log(err);
               if(!user.length) {
                 return done(null, false);

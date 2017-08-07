@@ -1,6 +1,6 @@
 import React from 'react';
 import './showcase.css';
-import Phone from './iphone.png';
+// import Phone from './iphone.png';
 
 export default function ShowCase () {
   return (

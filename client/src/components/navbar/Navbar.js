@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserInfo from '../user-info/user-info'
+// import UserInfo from '../user-info/user-info'
 import './navbar.css';
 // import { score, questionNumber } from '../../actions';
 
@@ -41,12 +41,7 @@ export class Navbar extends Component {
     );
   }
 }
-{/* <ul>
-  <li className="main-nav-link">Question #{this.props.questionCount}</li>
-  <li className="main-nav-link">Score: {this.props.score} {points}</li>
-  <li className="main-nav-link"><div className="profile"><UserInfo /></div></li>
-  <li className="main-nav-link"><a href={'/api/auth/logout'}>{'logout'}</a></li>
-</ul> */}
+
 const mapStateToProps = (state) => ({
   score: state.score,
   questionCount: state.questionCount

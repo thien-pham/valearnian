@@ -5,9 +5,7 @@ body {
 .navbar {
   width: 100%;
 }
-/*.profile {
-  color: white;
-}*/
+
 .navbar-left,  {
   margin-top: 0;
 }
@@ -19,53 +17,3 @@ body {
 .score {
   margin-left: 44px!important;
 }
-
-/** {
-  box-sizing: border-box;
-}
-header {
-  max-width: 1200px;
-  margin: auto;
-}*/
-
-/*.main-nav {
-  margin-top: 20px;
-  display: flex;
-  height: 70px;
-  justify-content: flex-end;
-  font-size: 18px;
-}
-
-.main-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: inline-flex;
-  background-color: #333;
-}
-
-.main-nav-link {
-  margin-right: auto;
-}
-
-.main-nav-link > a {
-  text-transform: uppercase;
-  padding: 14px 18px;
-  display: block;
-}*/
-
-/*li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-}*/

@@ -3,7 +3,6 @@ import React from 'react';
 export default class QuestionsQueue extends React.Component {
 constructor(props) {
   super(props);
-
   this.state = {
 
   }
