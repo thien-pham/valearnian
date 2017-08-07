@@ -7,12 +7,6 @@ import { createUser } from '../actions';
 
 
 class App extends React.Component {
-  // constructor (props) {
-  //   super(props);
-  //   this.state = {
-  //     currentUser: null
-  //   };
-  // }
 
   componentDidMount () {
     const accessToken = Cookies.get('accessToken');

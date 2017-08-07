@@ -36,6 +36,10 @@ export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const incrementScore = () => ({
   type: INCREMENT_SCORE });
 
+export const INCREMENT_QUESTION = 'INCREMENT_QUESTION';
+export const incrementQuestion = () => ({
+  type: INCREMENT_QUESTION });
+
 export const ENQUEUE = 'ENQUEUE';
 export const enqueue = () => ({
   type: ENQUEUE });
@@ -49,8 +53,10 @@ export const requeue = () => ({
   type: REQUEUE });
 
 export const FILL_UP_QUEUE = 'FILL_UP_QUEUE';
-export const fillUpQueue = () => ({
-  type: FILL_UP_QUEUE });
+export const fillUpQueue = (array) => ({
+  type: FILL_UP_QUEUE,
+  array
+});
 
 export const score = () => dispatch => {
   dispatch(fetchScore);
@@ -59,6 +65,11 @@ export const score = () => dispatch => {
 export const questionNumber = () => dispatch => {
   dispatch(fetchQuestionNumber);
 };
+
+export const NEW_GAME = 'NEW_GAME';
+export const newGame = () => ({
+    type: NEW_GAME
+});
 
 export const fetchQuestion = () => dispatch => {
   dispatch(fetchQuestionRequest());
