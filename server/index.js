@@ -3,18 +3,20 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
-const { User, Question } = require('./models');
-const jsonParser = require('body-parser').json();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+
 
 // const logger = require('morgan');
 // app.use(logger('combined'));
 require('dotenv').config();
 const {DATABASE_URL, PORT} = process.env;
+const { User, Question } = require('./models');
 //The user schema
-const mongoose = require('mongoose');
 // const {SERVER} = require('./secret');
 //Router to authenticate
-const mainRoutes = require('./routes/main');
+// const mainRoutes = require('./routes/main');
 // Serve the built client
 
 let secret = {
@@ -29,9 +31,48 @@ if(process.env.NODE_ENV != 'production') {
 
 const app = express();
 
-app.use(mainRoutes);
-app.use(jsonParser);
+// app.use(mainRoutes);
+// app.use(jsonParser);
 app.use(passport.initialize());
+app.use(bodyParser.json());
+
+app.get('/questions/:userId',
+  passport.authenticate('bearer', {session: false}),
+    (req, res) => {
+        let userId = req.params.userId;
+        User.find({_id: userId},
+          (err, user) => {
+            if (err) {
+              return console.error(err);
+            }
+            const word = req.user.questions[0];
+            return res.json({})
+            }
+        );
+
+        const getQuestion = (userInfo) => {
+            let result = userInfo.questions[0].questionId;
+            Questions.findOne({
+                _id: questionId
+            }, (err, question) => {
+                if (err) return res.send(err);
+                return res.json({
+                    question,
+                    result
+                });
+            });
+        }
+    });
+
+app.get('/questions', (req, res) => {
+  Questions
+    .find({}, (err, question) => {
+      if(err) {
+        res.send(err);
+      }
+      res.json(question);
+    });
+});
 
 passport.use(
     new GoogleStrategy({
