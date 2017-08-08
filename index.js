@@ -1,12 +1,14 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
-
+const conf = require( './server/config');
 const app = express();
-const runServer = require('./server').runServer;
+// const runServer = require('./server').runServer;
 
 if (process.env.NODE_ENV === 'production') {
     // Just run the server
-    runServer(undefined, process.env.PORT || 8080);
+    process.chdir('server');
+    const runServer = require('./server').runServer;
+    runServer(conf.PORT || 8080);
 }
 else {
     const app = express();
@@ -21,4 +23,3 @@ else {
     }));
     app.listen(process.env.PORT || 8080);
 }
-//Separate branches
