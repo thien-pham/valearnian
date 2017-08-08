@@ -189,13 +189,7 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 });
 
 let server;
-// function runServer(port=3001) {
-//     return new Promise((resolve, reject) => {
-//         server = app.listen(port, () => {
-//             resolve();
-//         }).on('error', reject);
-//     });
-// }
+
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
     return new Promise((resolve, reject) => {
          mongoose.connect(databaseUrl, err => {
@@ -205,12 +199,17 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
             console.log('Db connected', port);
             server = app.listen(port, () => {
                 resolve();
-            }).on('error', reject);
+            })
+            .on('error', err => {
+              mongoose.disconnect();
+              reject(err);
+            });
         });
     });
 }
 
 function closeServer() {
+  return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
         server.close(err => {
             if (err) {
@@ -219,6 +218,7 @@ function closeServer() {
             resolve();
         });
     });
+  });
 }
 
 if (require.main === module) {
