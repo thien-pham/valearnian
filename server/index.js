@@ -7,6 +7,8 @@ const jsonParser = require('body-parser').json();
 const app = express();
 const logger = require('morgan');
 app.use(logger('combined'));
+require('dotenv').config();
+const {DATABASE_URL, PORT} = process.env;
 //The user schema
 const User = require('./models');
 const mongoose = require('mongoose');
@@ -35,9 +37,9 @@ let server;
 //         }).on('error', reject);
 //     });
 // }
-function runServer(port=3001) {
+function runServer(databaseUrl=DATABASE_URL, port=PORT) {
     return new Promise((resolve, reject) => {
-         mongoose.connect(SERVER, err => {
+         mongoose.connect(databaseUrl, err => {
             if(err) {
               return reject(err);
         }
