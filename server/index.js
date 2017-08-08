@@ -52,19 +52,17 @@ app.get('/questions/:userId',
 
         const getQuestion = (userInfo) => {
             let result = userInfo.questions[0].questionId;
-            Questions.findOne({
-                _id: questionId
-            }, (err, question) => {
-                if (err) return res.send(err);
-                return res.json({
-                    question,
-                    result
-                });
+            Questions.findOne({_id: questionId},
+              (err, question) => {
+                if (err) {
+                  return res.send(err);
+                }
+                return res.json({question, result});
             });
         }
     });
 
-app.get('/questions', (req, res) => {
+app.get('/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
   Questions
     .find({}, (err, question) => {
       if(err) {
