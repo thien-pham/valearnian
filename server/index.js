@@ -85,8 +85,8 @@ passport.use(
               googleId: profile.id,
               name: profile.displayName,
             })
-              return cb(null, user)
-          }else {
+            return cb(null, user)
+          } else {
             return cb(null, user[0])
           }
         })
@@ -97,7 +97,7 @@ passport.use(
     new BearerStrategy(
         (token, done) => {
             User.find({accessToken: token}, function(err, user) {
-
+              if(err) console.log(err);
               if(!user.length) {
                 return done(null, false);
              }
