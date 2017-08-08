@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const { User, Question } = require('./models');
 const jsonParser = require('body-parser').json();
-const app = express();
+
 // const logger = require('morgan');
 // app.use(logger('combined'));
 require('dotenv').config();
@@ -15,8 +15,6 @@ const mongoose = require('mongoose');
 // const {SERVER} = require('./secret');
 //Router to authenticate
 const mainRoutes = require('./routes/main');
-app.use(mainRoutes);
-app.use(jsonParser);
 // Serve the built client
 
 let secret = {
@@ -28,6 +26,12 @@ let secret = {
 if(process.env.NODE_ENV != 'production') {
   secret = require('../secret');
 }
+
+const app = express();
+
+app.use(mainRoutes);
+app.use(jsonParser);
+app.use(passport.initialize());
 
 passport.use(
     new GoogleStrategy({
