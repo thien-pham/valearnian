@@ -20,15 +20,15 @@ const { User, Question } = require('./models');
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET,
-  DATABASE_URL: process.env.DATABASE_URL
+  CLIENT_SECRET: process.env.CLIENT_SECRET
 };
 
 if(process.env.NODE_ENV != 'production') {
-  secret = require('../secret');
+  secret = require('./secret');
 }
 
 const app = express();
+
 
 // app.use(mainRoutes);
 // app.use(jsonParser);
@@ -78,21 +78,19 @@ passport.use(
         callbackURL: `/api/auth/google/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-        User.find({
-          googleId: profile.id
-        }, (err, user) => {
+        User.find({ googleId: profile.id }, (err, user) => {
           if(!user.length) {
             User.create({
               accessToken: accessToken,
               googleId: profile.id,
               name: profile.displayName,
-            }, function(err, user){
+            })
               return cb(null, user)
             });
           }else {
             return cb(null, user[0])
           }
-        });
+        })
     }
 ));
 
@@ -100,7 +98,7 @@ passport.use(
     new BearerStrategy(
         (token, done) => {
             User.find({accessToken: token}, function(err, user) {
-              if(err) console.log(err);
+
               if(!user.length) {
                 return done(null, false);
              }
