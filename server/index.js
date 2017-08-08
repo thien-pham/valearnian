@@ -86,7 +86,6 @@ passport.use(
               name: profile.displayName,
             })
               return cb(null, user)
-            });
           }else {
             return cb(null, user[0])
           }
