@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 
-
 // const logger = require('morgan');
 // app.use(logger('combined'));
 require('dotenv').config();
@@ -83,53 +82,24 @@ passport.use(
           googleId: profile.id
         }, (err, user) => {
           if(!user.length) {
-        User.create({
-            accessToken: accessToken,
-            googleId: profile.id,
-            name: profile.displayName,
-            })
-            return cb(null, user)
+            User.create({
+              accessToken: accessToken,
+              googleId: profile.id,
+              name: profile.displayName,
+            }, function(err, user){
+              return cb(null, user)
+            });
           }else {
             return cb(null, user[0])
           }
-        })
-        /*
-        const user = database[accessToken] = {
-            googleId: profile.id,
-            accessToken: accessToken
-        }
-        User
-          .findOne({googleId: profile.id})
-          .exec()
-          .then(user => {
-            if(user){
-              return User
-              .findByIdAndUpdate(user.id, {
-                $set: {accessToken}}, {new: true})
-            }
-            return User.create({
-              googleId: profile.id,
-              accessToken: accessToken
-            })
-          })
-          .then(user => {
-            cb(null, {googleId: user.googleId , accessToken: user.accessToken});
-          })
-          .catch(err => console.error(err));
-          */
-        //The user is just an object with id token prop
-        // console.log(`This is the database:${JSON.stringify(database)}`);
-        // console.log(`This is the profileId:${profile.id}`);
-        // console.log(`This is the accessToken:${accessToken}`);
-        //return cb(null, user);
+        });
     }
 ));
 
 passport.use(
     new BearerStrategy(
         (token, done) => {
-            User.find({accessToken:token}, function(err,user){
-              console.log('USER', user);
+            User.find({accessToken: token}, function(err, user) {
               if(err) console.log(err);
               if(!user.length) {
                 return done(null, false);
