@@ -5,8 +5,8 @@ const express = require('express');
 // const bearerstrategy = require('passport-http-bearer').strategy;
 const jsonParser = require('body-parser').json();
 const app = express();
-const logger = require('morgan');
-app.use(logger('combined'));
+// const logger = require('morgan');
+// app.use(logger('combined'));
 require('dotenv').config();
 const {DATABASE_URL, PORT} = process.env;
 //The user schema
