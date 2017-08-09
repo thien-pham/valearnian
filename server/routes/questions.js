@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const qRoutes = require( 'express' ).Router( );
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const passport = require('passport');
 const path = require('path');
-
-import {User, Question} from '../models';
+const { User, Question } = require('../models');
+// import {User, Question} from '../models';
 
 // const questionResponse = (questionId, word, score) => {
 //     return { questionId, word, score, result};
@@ -16,7 +16,8 @@ import {User, Question} from '../models';
 //     res.status(200).json(questionResponse(word.questionId, word.word, req.user.score, false));
 // });
 
-router.get('/questions/:userId',
+
+qRoutes.get('/questions/:userId',
   passport.authenticate('bearer', {session: false}),
     (req, res) => {
         let userId = req.params.userId;
@@ -44,14 +45,15 @@ router.get('/questions/:userId',
         }
     });
 
-router.get('/questions', (req, res) => {
-  Questions
-    .find({}, (err, question) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json(question);
-    });
+qRoutes.get('/questions',
+  passport.authenticate('bearer', {session: false}), (req, res) => {
+    Questions
+      .find({}, (err, question) => {
+        if(err) {
+          res.send(err);
+        }
+        res.json(question);
+      });
 });
 
-module.exports = router;
+module.exports = qRoutes;
