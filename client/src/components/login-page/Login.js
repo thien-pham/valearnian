@@ -15,7 +15,7 @@ export default class Login extends Component {
           <hr />
           <input type="text" placeholder="Enter Username"/>
           <input type="password" placeholder="Enter Password"/>
-          <button>Sign up / Log in</button>
+          <button onClick={'/api/auth/google'}>Sign up / Log in</button>
         </form>
       </div>
     </div>

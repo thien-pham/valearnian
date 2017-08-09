@@ -81,28 +81,11 @@ export const questionNumber = () => dispatch => {
   dispatch(fetchQuestionNumber);
 };
 
-export const NEW_GAME = 'NEW_GAME';
-export const newGame = () => ({
-    type: NEW_GAME
-});
+// export const NEW_GAME = 'NEW_GAME';
+// export const newGame = () => ({
+//     type: NEW_GAME
+// });
 
-// export const fetchQuestion = (accessToken) => dispatch => {
-//   dispatch(fetchQuestionRequest());
-//   const accessToken = Cookies.get('accessToken');
-//   return fetch('/api/questions', {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`
-//     }
-//   })
-//       .then(data => {
-//         if (!data.ok) {
-//           return dispatch(fetchQuestionFailure());
-//         }
-//         return data.json();
-//       }).then(response => {
-//         return dispatch(fetchQuestionSuccess(response));
-//       });
-// };
 export const fetchQuestion = () => (dispatch) => {
   dispatch(fetchQuestionRequest());
   const accessToken = Cookies.get('accessToken');
@@ -144,25 +127,3 @@ export const fetchUser = (accessToken) => (dispatch) => {
     dispatch(fetchUserFailure(error));
   });
 };
-
-// const accessToken = Cookies.get('accessToken');
-// if (accessToken) {
-//   fetch('/api/me', {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`
-//     }
-//   })
-//     .then(res => {
-//       if (!res.ok) {
-//         if (res.status === 401) {
-//           Cookies.remove('accessToken');
-//           return;
-//         }
-//         throw new Error(res.statusText);
-//       }
-//       return res.json();
-//     })
-//     .then(currentUser =>
-//       this.props.dispatch(createUser(currentUser))
-//     );
-// }
