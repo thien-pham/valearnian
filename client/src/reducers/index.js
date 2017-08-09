@@ -82,10 +82,10 @@ const reducer = (state = initialState, action) => {
     };
   case FETCH_USER_SUCCESS:
     return {
-      ...state, 
+      ...state,
       loading: false,
       error: null,
-      currentUser: action.currentUser.name
+      currentUser: action.currentUser
     };
 //   case FETCH_SCORE:
 //     return {
