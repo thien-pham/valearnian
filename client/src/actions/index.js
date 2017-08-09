@@ -103,7 +103,7 @@ export const newGame = () => ({
 //         return dispatch(fetchQuestionSuccess(response));
 //       });
 // };
-export const fetchQuestion = (accessToken) => (dispatch) => {
+export const fetchQuestion = () => (dispatch) => {
   dispatch(fetchQuestionRequest());
   const accessToken = Cookies.get('accessToken');
   fetch('/api/questions', {

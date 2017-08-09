@@ -46,6 +46,7 @@ const reducer = (state = initialState, action) => {
       error: true
     };
   case FETCH_QUESTION_SUCCESS:
+  console.log(action.questions);
     return {
       ...state,
       loading: false,

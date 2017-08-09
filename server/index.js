@@ -112,8 +112,9 @@ app.get('/api/auth/logout', (req, res) => {
 app.get('/api/questions',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
-    Questions
+    Question
       .find()
+      .exec()
       .then(questions => {
         return res.json(questions.map(question => question.apiRepr()));
       })
@@ -136,31 +137,31 @@ app.get('/api/questions',
 //     });
 // });
 
-app.get('/api/questions/:userId',
-  passport.authenticate('bearer', {session: false}),
-    (req, res) => {
-        let userId = req.params.userId;
-        User.find({_id: userId},
-          (err, user) => {
-            if (err) {
-              return console.error(err);
-            }
-            const word = req.user.questions[0];
-            return res.json({})
-            }
-        );
-
-        const getQuestion = (userInfo) => {
-            let result = userInfo.questions[0].questionId;
-            Questions.findOne({_id: questionId},
-              (err, question) => {
-                if (err) {
-                  return res.send(err);
-                }
-                return res.json({question, result});
-            });
-        }
-    });
+// app.get('/api/questions/:userId',
+//   passport.authenticate('bearer', {session: false}),
+//     (req, res) => {
+//         let userId = req.params.userId;
+//         User.find({_id: userId},
+//           (err, user) => {
+//             if (err) {
+//               return console.error(err);
+//             }
+//             const word = req.user.questions[0];
+//             return res.json({})
+//             }
+//         );
+//
+//         const getQuestion = (userInfo) => {
+//             let result = userInfo.questions[0].questionId;
+//             Questions.findOne({_id: questionId},
+//               (err, question) => {
+//                 if (err) {
+//                   return res.send(err);
+//                 }
+//                 return res.json({question, result});
+//             });
+//         }
+//     });
 
 
 
