@@ -65,11 +65,11 @@ const reducer = (state = initialState, action) => {
   //     questions: q,
   //     answers: a
   //   });
-  case CREATE_USER:
-    return {
-      ...state,
-      currentUser: action.currentUser
-    };
+  // case CREATE_USER:
+  //   return {
+  //     ...state,
+  //     currentUser: action.currentUser
+  //   };
   case FETCH_USER_REQUEST:
     return {
       ...state,
