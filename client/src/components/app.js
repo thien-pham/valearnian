@@ -2,39 +2,43 @@ import React from 'react';
 import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import QuestionPage from './question-page/question-page';
-import LoginPage from './login-page/Login-page';
-import { createUser } from '../actions';
-
+import Login from './login-page/Login';
+import { fetchUser } from '../actions';
 
 class App extends React.Component {
 
   componentDidMount () {
+    // const accessToken = Cookies.get('accessToken');
+    // if (accessToken) {
+    //   fetch('/api/me', {
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`
+    //     }
+    //   })
+    //     .then(res => {
+    //       if (!res.ok) {
+    //         if (res.status === 401) {
+    //           Cookies.remove('accessToken');
+    //           return;
+    //         }
+    //         throw new Error(res.statusText);
+    //       }
+    //       return res.json();
+    //     })
+    //     .then(currentUser =>
+    //       this.props.dispatch(createUser(currentUser))
+    //     );
+    // }
     const accessToken = Cookies.get('accessToken');
-    if (accessToken) {
-      fetch('/api/me', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
+        console.log(accessToken)
+        if(accessToken) {
+          this.props.dispatch(fetchUser(accessToken));
         }
-      })
-        .then(res => {
-          if (!res.ok) {
-            if (res.status === 401) {
-              Cookies.remove('accessToken');
-              return;
-            }
-            throw new Error(res.statusText);
-          }
-          return res.json();
-        })
-        .then(currentUser =>
-          this.props.dispatch(createUser(currentUser))
-        );
-    }
   }
 
   render () {
     if (!this.props.currentUser) {
-      return <LoginPage />;
+      return <Login />;
     }
     return <QuestionPage />;
   }

@@ -1,4 +1,5 @@
 import * as Cookies from 'js-cookie';
+
 export const FETCH_QUESTION_REQUEST = 'FETCH_QUESTION_REQUEST';
 export const fetchQuestionRequest = () => ({
   type: FETCH_QUESTION_REQUEST });
@@ -10,6 +11,20 @@ export const fetchQuestionSuccess = (questions) => ({
 export const FETCH_QUESTION_FAILURE = 'FETCH_QUESTION_FAILURE';
 export const fetchQuestionFailure = () => ({
   type: FETCH_QUESTION_FAILURE });
+
+export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
+export const fetchUserRequest = () => ({
+  type: FETCH_USER_REQUEST });
+
+export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+export const fetchUserSuccess = user => ({
+  type: FETCH_USER_SUCCESS,
+  user });
+
+export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
+export const fetchUserFailure = error => ({
+  type: FETCH_USER_FAILURE,
+  error });
 
 export const FETCH_SCORE = 'FETCH_SCORE';
 export const fetchScore = () => ({
@@ -23,9 +38,9 @@ export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
 export const fetchQuestionNumber = () => ({
   type: FETCH_QUESTION_NUMBER });
 
-export const CREATE_USER = 'CREATE_USER';
-export const createUser = (currentUser) => ({
-  type: CREATE_USER, currentUser });
+// export const CREATE_USER = 'CREATE_USER';
+// export const createUser = (currentUser) => ({
+//   type: CREATE_USER, currentUser });
 
 export const MAKE_GUESS = 'MAKE_GUESS';
 export const makeGuess = (guess) => ({
@@ -71,7 +86,7 @@ export const newGame = () => ({
     type: NEW_GAME
 });
 
-export const fetchQuestion = () => dispatch => {
+export const fetchQuestion = (accessToken) => dispatch => {
   dispatch(fetchQuestionRequest());
   const accessToken = Cookies.get('accessToken');
   return fetch('/api/questions', {
@@ -87,4 +102,28 @@ export const fetchQuestion = () => dispatch => {
       }).then(response => {
         return dispatch(fetchQuestionSuccess(response));
       });
+};
+
+export const fetchUser = (accessToken) => (dispatch) => {
+  dispatch(fetchUserRequest());
+  fetch(`/api/users/${accessToken}`, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  }).then(res => {
+    console.log('RES', res);
+    if(!res.ok) {
+      if(res.status === 401) {
+        Cookies.remove('accessToken');
+        return;
+      }
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  }).then(user => {
+    console.log(user);
+    dispatch(fetchUserSuccess(user));
+  }).catch(error => {
+    dispatch(fetchUserFailure(error));
+  });
 };

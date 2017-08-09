@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './form.css';
+import './login.css';
 import Logo from './valearnian.jpg';
 
-export default class Form extends Component {
+export default class Login extends Component {
   render () {
     return (
       <div className="loginPage">

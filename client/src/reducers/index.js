@@ -2,6 +2,9 @@ import {
   FETCH_QUESTION_REQUEST,
   FETCH_QUESTION_SUCCESS,
   FETCH_QUESTION_FAILURE,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE,
   //FETCH_SCORE,
   FETCH_QUESTION_INDEX,
   CREATE_USER,
@@ -65,7 +68,25 @@ const reducer = (state = initialState, action) => {
       ...state,
       currentUser: action.currentUser
     };
-
+  case FETCH_USER_REQUEST:
+    return {
+      ...state,
+      loading: true,
+      error: null
+    };
+  case FETCH_USER_FAILURE:
+    return {
+      ...state,
+      loading: false,
+      error: true
+    };
+  case FETCH_USER_SUCCESS:
+    return {
+      ...state, 
+      loading: false,
+      error: null,
+      currentUser: action.currentUser.name
+    };
 //   case FETCH_SCORE:
 //     return {
 //       ...state,
@@ -117,10 +138,10 @@ const reducer = (state = initialState, action) => {
         questions: action.array
       }
     ];
-  case NEW_GAME:
-    return {
-      initialState
-      };
+  // case NEW_GAME:
+  //   return {
+  //     initialState
+  //     };
   default:
     return state;
   }

@@ -25,28 +25,33 @@ export class QuestionPage extends React.Component {
     };
   }
 
-  componentWillMount () {
-    this.props.dispatch(fetchQuestion());
+  componentDidMount() {
+    const accessToken = Cookies.get('accessToken');
+    this.props.dispatch(fetchQuestion(accessToken));
   }
 
-  componentDidMount() {
-      const accessToken = Cookies.get('accessToken');
-      fetch('/api/me', {
-              headers: {
-                  'Authorization': `Bearer ${accessToken}`
-              }
-          }).then(res => {
-          if (!res.ok) {
-              throw new Error(res.statusText);
-          }
-          return res.json();
-      }).then((user) => {
-          this.setState({
-              name: user.name
-          })
-        }
-      );
-  }
+  // componentWillMount () {
+  //   this.props.dispatch(fetchQuestion());
+  // }
+  //
+  // componentDidMount() {
+  //     const accessToken = Cookies.get('accessToken');
+  //     fetch('/api/me', {
+  //             headers: {
+  //                 'Authorization': `Bearer ${accessToken}`
+  //             }
+  //         }).then(res => {
+  //         if (!res.ok) {
+  //             throw new Error(res.statusText);
+  //         }
+  //         return res.json();
+  //     }).then((user) => {
+  //         this.setState({
+  //             name: user.name
+  //         })
+  //       }
+  //     );
+  // }
 
   componentWillReceiveProps(nextProps) {
     console.log('NEXTPROPS', nextProps);
@@ -58,11 +63,11 @@ export class QuestionPage extends React.Component {
       }
     }
 
-    newGame(event) {
-        event.preventDefault();
-        this.props.dispatch(newGame());
-        this.props.dispatch(fetchQuestion());
-    }
+    // newGame(event) {
+    //     event.preventDefault();
+    //     this.props.dispatch(newGame());
+    //     this.props.dispatch(fetchQuestion());
+    // }
 
     submitGuess (e) {
       e.preventDefault();
@@ -128,8 +133,8 @@ export class QuestionPage extends React.Component {
           <img className="image" src={require('./dragons.jpg')} width='150' role="presentation"/>
           <div className="container2">
             <h4>Daoruni gimi, <strike>Ionos Sonaro</strike> {this.state.name}.</h4>
-            <button className="newGame" type="submit"
-              onClick={e => this.newGame(e)}>Restart?</button>
+            {/* <button className="newGame" type="submit"
+              onClick={e => this.newGame(e)}>Restart?</button> */}
             {/* <button onClick={'/api/auth/logout'}>logout</button> */}
             {/* <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a> */}
         </div>
