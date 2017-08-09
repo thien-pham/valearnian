@@ -117,7 +117,7 @@ export const fetchQuestion = (accessToken) => (dispatch) => {
   }).then(data => {
     dispatch(fetchQuestionSuccess(data));
   }).catch(error => {
-    dispatch(fetchQuestionError(error));
+    dispatch(fetchQuestionFailure(error));
   });
 };
 
