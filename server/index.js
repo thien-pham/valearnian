@@ -27,6 +27,29 @@ const { User, Question } = require('./models');
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
+app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
+  Questions
+    .find({}, (err, question) => {
+      if(err) {
+        res.send(err);
+      }
+      res.json(question);
+    });
+});
+
+app.get('/api/users/:accessToken', (req, res) => {
+  User
+    .findOne({accessToken: req.params.accessToken})
+    .then(user =>{
+      console.log(user);
+      return res.json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: "Something's gone terribly awry"});
+    });
+});
+
 passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
@@ -69,26 +92,13 @@ passport.use(
 );
 
 //Authentication endpoints
-app.get('/api/me',
-    passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json({
-        googleId: req.user.googleId,
-        name: req.user.name
-    })
-);
-
-app.get('/api/users/:accessToken', (req, res) => {
-  User
-    .findOne({accessToken: req.params.accessToken})
-    .then(user =>{
-      console.log(user);
-      return res.json(user);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({error: "Something's gone terribly awry."});
-    });
-});
+// app.get('/api/me',
+//     passport.authenticate('bearer', {session: false}),
+//     (req, res) => res.json({
+//         googleId: req.user.googleId,
+//         name: req.user.name
+//     })
+// );
 
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
@@ -137,15 +147,7 @@ app.get('/api/questions/:userId',
         }
     });
 
-app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
-  Questions
-    .find({}, (err, question) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json(question);
-    });
-});
+
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
