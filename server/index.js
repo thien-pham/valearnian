@@ -193,6 +193,7 @@ app.get('/questions', passport.authenticate('bearer', {session: false}), (req, r
     });
 });
 
+// Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
@@ -206,24 +207,29 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
          mongoose.connect(databaseUrl, err => {
             if(err) {
               return reject(err);
-        }
+            }
             console.log('Db connected', port);
             server = app.listen(port, () => {
                 resolve();
-            }).on('error', reject);
+            })
+            .on('error', err => {
+              reject(err);
+            });
         });
     });
 }
 
 function closeServer() {
+  return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
         server.close(err => {
             if (err) {
-                return reject(err);
+              return reject(err);
             }
             resolve();
-        });
-    });
+          });
+      });
+  });
 }
 
 if (require.main === module) {
