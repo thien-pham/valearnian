@@ -91,7 +91,7 @@ passport.use(
     )
 );
 
-Authentication endpoints
+// Authentication endpoints
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => res.json({
