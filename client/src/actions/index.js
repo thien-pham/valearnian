@@ -121,7 +121,7 @@ export const fetchQuestion = (accessToken) => (dispatch) => {
   });
 };
 
-export const fetchUser = (currentUser) => (dispatch) => {
+export const fetchUser = (accessToken) => (dispatch) => {
   dispatch(fetchUserRequest());
   fetch(`/api/me`, {
     headers: {
