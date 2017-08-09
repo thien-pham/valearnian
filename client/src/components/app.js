@@ -12,32 +12,10 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    // const accessToken = Cookies.get('accessToken');
-    // if (accessToken) {
-    //   fetch('/api/me', {
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`
-    //     }
-    //   })
-    //     .then(res => {
-    //       if (!res.ok) {
-    //         if (res.status === 401) {
-    //           Cookies.remove('accessToken');
-    //           return;
-    //         }
-    //         throw new Error(res.statusText);
-    //       }
-    //       return res.json();
-    //     })
-    //     .then(currentUser =>
-    //       this.props.dispatch(createUser(currentUser))
-    //     );
-    // }
     const accessToken = Cookies.get('accessToken');
-        console.log(accessToken)
-        if(accessToken) {
-          this.props.dispatch(fetchUser(accessToken));
-        }
+      if(accessToken) {
+        this.props.dispatch(fetchUser(currentUser));
+      }
   }
 
   render () {

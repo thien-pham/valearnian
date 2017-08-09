@@ -121,14 +121,13 @@ export const fetchQuestion = (accessToken) => (dispatch) => {
   });
 };
 
-export const fetchUser = (accessToken) => (dispatch) => {
+export const fetchUser = (currentUser) => (dispatch) => {
   dispatch(fetchUserRequest());
-  fetch(`/api/users/${accessToken}`, {
+  fetch(`/api/me`, {
     headers: {
       'Authorization': `Bearer ${accessToken}`
     }
   }).then(res => {
-    console.log('RES', res);
     if(!res.ok) {
       if(res.status === 401) {
         Cookies.remove('accessToken');
@@ -144,3 +143,25 @@ export const fetchUser = (accessToken) => (dispatch) => {
     dispatch(fetchUserFailure(error));
   });
 };
+
+// const accessToken = Cookies.get('accessToken');
+// if (accessToken) {
+//   fetch('/api/me', {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`
+//     }
+//   })
+//     .then(res => {
+//       if (!res.ok) {
+//         if (res.status === 401) {
+//           Cookies.remove('accessToken');
+//           return;
+//         }
+//         throw new Error(res.statusText);
+//       }
+//       return res.json();
+//     })
+//     .then(currentUser =>
+//       this.props.dispatch(createUser(currentUser))
+//     );
+// }
