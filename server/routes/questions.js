@@ -1,5 +1,8 @@
-const express = require('express');
-const qRoutes = require( 'express' ).Router( );
+require('dotenv').config();
+import express from 'express';
+import passport from 'passport';
+// const express = require('express');
+const qRoutes = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const passport = require('passport');
@@ -16,6 +19,7 @@ const { User, Question } = require('../models');
 //     res.status(200).json(questionResponse(word.questionId, word.word, req.user.score, false));
 // });
 
+qRoutes.use(bodyParser.json());
 
 qRoutes.get('/questions/:userId',
   passport.authenticate('bearer', {session: false}),
