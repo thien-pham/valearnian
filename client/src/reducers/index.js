@@ -40,16 +40,18 @@ const reducer = (state = initialState, action) => {
       loading: true
     };
   case FETCH_QUESTION_FAILURE:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       loading: false,
       error: true
-    });
+    };
   case FETCH_QUESTION_SUCCESS:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       loading: false,
       error: null,
       questions: action.questions
-    });
+    };
   // case FETCH_QUESTION_SUCCESS:
   //   let q = [];
   //   let a = [];

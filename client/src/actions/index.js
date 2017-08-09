@@ -86,22 +86,39 @@ export const newGame = () => ({
     type: NEW_GAME
 });
 
-export const fetchQuestion = (accessToken) => dispatch => {
+// export const fetchQuestion = (accessToken) => dispatch => {
+//   dispatch(fetchQuestionRequest());
+//   const accessToken = Cookies.get('accessToken');
+//   return fetch('/api/questions', {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`
+//     }
+//   })
+//       .then(data => {
+//         if (!data.ok) {
+//           return dispatch(fetchQuestionFailure());
+//         }
+//         return data.json();
+//       }).then(response => {
+//         return dispatch(fetchQuestionSuccess(response));
+//       });
+// };
+export const fetchQuestion = (accessToken) => (dispatch) => {
   dispatch(fetchQuestionRequest());
-  const accessToken = Cookies.get('accessToken');
-  return fetch('/api/questions', {
+  fetch('/api/questions', {
     headers: {
-      Authorization: `Bearer ${accessToken}`
+      'Authorization': `Bearer ${accessToken}`
     }
-  })
-      .then(data => {
-        if (!data.ok) {
-          return dispatch(fetchQuestionFailure());
-        }
-        return data.json();
-      }).then(response => {
-        return dispatch(fetchQuestionSuccess(response));
-      });
+  }).then(res => {
+    if(!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  }).then(data => {
+    dispatch(fetchQuestionSuccess(data));
+  }).catch(error => {
+    dispatch(fetchQuestionError(error));
+  });
 };
 
 export const fetchUser = (accessToken) => (dispatch) => {
