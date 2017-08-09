@@ -111,7 +111,7 @@ app.get('/api/auth/logout', (req, res) => {
 });
 
 //API endpoints
-app.get('/questions/:userId',
+app.get('/api/questions/:userId',
   passport.authenticate('bearer', {session: false}),
     (req, res) => {
         let userId = req.params.userId;
@@ -137,7 +137,7 @@ app.get('/questions/:userId',
         }
     });
 
-app.get('/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
+app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
   Questions
     .find({}, (err, question) => {
       if(err) {
