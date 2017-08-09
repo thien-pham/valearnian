@@ -77,6 +77,19 @@ app.get('/api/me',
     })
 );
 
+app.get('/api/users/:accessToken', (req, res) => {
+  User
+    .findOne({accessToken: req.params.accessToken})
+    .then(user =>{
+      console.log(user);
+      return res.json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: "Something's gone terribly awry."});
+    });
+});
+
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
