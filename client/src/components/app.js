@@ -14,7 +14,7 @@ class App extends React.Component {
   componentDidMount () {
     const accessToken = Cookies.get('accessToken');
       if(accessToken) {
-        this.props.dispatch(fetchUser(currentUser));
+        this.props.dispatch(fetchUser());
       }
   }
 
