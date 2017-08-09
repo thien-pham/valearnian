@@ -105,13 +105,14 @@ export const newGame = () => ({
 // };
 export const fetchQuestion = (accessToken) => (dispatch) => {
   dispatch(fetchQuestionRequest());
+  const accessToken = Cookies.get('accessToken');
   fetch('/api/questions', {
     headers: {
       'Authorization': `Bearer ${accessToken}`
     }
   }).then(res => {
     if(!res.ok) {
-      return Promise.reject(res.statusText);
+      throw new Error(res.statusText);
     }
     return res.json();
   }).then(data => {

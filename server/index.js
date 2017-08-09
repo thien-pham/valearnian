@@ -27,29 +27,6 @@ const { User, Question } = require('./models');
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
-app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
-  Questions
-    .find({}, (err, question) => {
-      if(err) {
-        res.send(err);
-      }
-      res.json(question);
-    });
-});
-
-// app.get('/api/users/:accessToken', (req, res) => {
-//   User
-//     .findOne({accessToken: req.params.accessToken})
-//     .then(user =>{
-//       console.log(user);
-//       return res.json(user);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({error: "Something's gone terribly awry"});
-//     });
-// });
-
 passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
@@ -121,6 +98,44 @@ app.get('/api/auth/logout', (req, res) => {
 });
 
 //API endpoints
+// app.get('/api/questions',
+//   passport.authenticate('bearer', {session: false}),
+//   (req, res) => {
+//     Questions
+//       .find({}, (err, question) => {
+//         if(err) {
+//           res.send(err);
+//         }
+//         res.json(question);
+//       });
+// });
+app.get('/api/questions',
+  passport.authenticate('bearer', {session: false}),
+  (req, res) => {
+    Questions
+      .find()
+      .then(questions => {
+        return res.json(questions.map(question => question.apiRepr()));
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json({error: "Something's gone awry."});
+      });
+});
+
+// app.get('/api/users/:accessToken', (req, res) => {
+//   User
+//     .findOne({accessToken: req.params.accessToken})
+//     .then(user =>{
+//       console.log(user);
+//       return res.json(user);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({error: "Something's gone terribly awry"});
+//     });
+// });
+
 app.get('/api/questions/:userId',
   passport.authenticate('bearer', {session: false}),
     (req, res) => {

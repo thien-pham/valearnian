@@ -52,6 +52,13 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
+questionSchema.methods.apiRepr = function() {
+  return {
+    question: this.question,
+    answer: this.answer
+  }
+}
+
 const User = mongoose.model('User', userSchema);
 const Question = mongoose.model('Questions', questionSchema);
 

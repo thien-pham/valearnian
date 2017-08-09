@@ -26,32 +26,9 @@ export class QuestionPage extends React.Component {
   }
 
   componentDidMount() {
-    const accessToken = Cookies.get('accessToken');
-    this.props.dispatch(fetchQuestion(accessToken));
+    // const accessToken = Cookies.get('accessToken');
+    this.props.dispatch(fetchQuestion());
   }
-
-  // componentWillMount () {
-  //   this.props.dispatch(fetchQuestion());
-  // }
-  //
-  // componentDidMount() {
-  //     const accessToken = Cookies.get('accessToken');
-  //     fetch('/api/me', {
-  //             headers: {
-  //                 'Authorization': `Bearer ${accessToken}`
-  //             }
-  //         }).then(res => {
-  //         if (!res.ok) {
-  //             throw new Error(res.statusText);
-  //         }
-  //         return res.json();
-  //     }).then((user) => {
-  //         this.setState({
-  //             name: user.name
-  //         })
-  //       }
-  //     );
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log('NEXTPROPS', nextProps);
