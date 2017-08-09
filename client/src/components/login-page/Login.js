@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import './login.css';
 import Logo from './valearnian.jpg';
+import './login.css';
 
 export default class Login extends Component {
+
+  login() {
+    window.location.assign('/api/auth/google');
+  }
+
   render () {
     return (
       <div className="loginPage">
@@ -15,7 +20,7 @@ export default class Login extends Component {
           <hr />
           <input type="text" placeholder="Enter Username"/>
           <input type="password" placeholder="Enter Password"/>
-          <button onClick={'/api/auth/google'}>Sign up / Log in</button>
+          <button onClick={this.login}>Sign up / Log in</button>
         </form>
       </div>
     </div>
