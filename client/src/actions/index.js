@@ -17,9 +17,9 @@ export const fetchUserRequest = () => ({
   type: FETCH_USER_REQUEST });
 
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
-export const fetchUserSuccess = user => ({
+export const fetchUserSuccess = currentUser => ({
   type: FETCH_USER_SUCCESS,
-  user });
+  currentUser });
 
 export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
 export const fetchUserFailure = error => ({
@@ -133,12 +133,12 @@ export const fetchUser = (accessToken) => (dispatch) => {
         Cookies.remove('accessToken');
         return;
       }
-      return Promise.reject(res.statusText);
+      throw new Error(res.statusText);
     }
     return res.json();
   }).then(user => {
-    console.log(user);
-    dispatch(fetchUserSuccess(user));
+    console.log(currentUser);
+    dispatch(fetchUserSuccess(currentUser));
   }).catch(error => {
     dispatch(fetchUserFailure(error));
   });
