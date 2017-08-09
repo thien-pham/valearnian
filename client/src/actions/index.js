@@ -136,7 +136,7 @@ export const fetchUser = (accessToken) => (dispatch) => {
       throw new Error(res.statusText);
     }
     return res.json();
-  }).then(user => {
+  }).then(currentUser => {
     console.log(currentUser);
     dispatch(fetchUserSuccess(currentUser));
   }).catch(error => {
