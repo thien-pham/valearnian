@@ -29,7 +29,7 @@ const {DATABASE_URL, PORT} = require('./config');
 const { User, Question } = require('./models');
 
 app.use('/auth/google', authRoutes);
-app.use('/questions', questionsRoutes);
+app.use('/questions', qRoutes);
 // app.use(jsonParser);
 // app.use(passport.initialize());
 app.use(bodyParser.json());
