@@ -5,17 +5,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const bodyParser = require('body-parser');
-
-
-// const logger = require('morgan');
-// app.use(logger('combined'));
 require('dotenv').config();
-
-//The user schema
-// const {SERVER} = require('./secret');
-//Router to authenticate
-// const mainRoutes = require('./routes/main');
-// Serve the built client
 mongoose.Promise = global.Promise;
 
 let secret = {
@@ -36,29 +26,6 @@ const { User, Question } = require('./models');
 // app.use(jsonParser);
 app.use(passport.initialize());
 app.use(bodyParser.json());
-
-
-// passport.use(
-//     new GoogleStrategy({
-//         clientID:  secret.CLIENT_ID,
-//         clientSecret: secret.CLIENT_SECRET,
-//         callbackURL: `/api/auth/google/callback`
-//     },
-//     (accessToken, refreshToken, profile, cb) => {
-//         User.find({ googleId: profile.id }, (err, user) => {
-//           if(!user.length) {
-//             User.create({
-//               accessToken: accessToken,
-//               googleId: profile.id,
-//               name: profile.displayName,
-//             })
-//             return cb(null, user)
-//           } else {
-//             return cb(null, user[0])
-//           }
-//         })
-//     }
-// ));
 
 passport.use(
     new GoogleStrategy({
@@ -85,32 +52,18 @@ passport.use(
     }
 ));
 
-// passport.use(
-//     new BearerStrategy(
-//         (token, done) => {
-//             User.find({accessToken: token}, function(err, user) {
-//               if(err) console.log(err);
-//               if(!user.length) {
-//                 return done(null, false);
-//              }
-//             return done(null, user[0]);
-//             });
-//         }
-//     )
-// );
-
 passport.use(
     new BearerStrategy(
-        (token, done) => {
-            return User.findOne({accessToken: token})
-                .exec()
-                .then((user) => {
-                    if (!user) {
-                        return done(null, false);
-                    }
-                    return done(null, user);
-                })
-                .catch(err => console.error(err))
+      (token, done) => {
+        return User.findOne({accessToken: token})
+          .exec()
+          .then((user) => {
+              if (!user) {
+                  return done(null, false);
+              }
+              return done(null, user);
+          })
+          .catch(err => console.error(err))
         }
     )
 );
@@ -137,18 +90,6 @@ app.get('/api/auth/google/callback',
         res.redirect('/');
     }
 );
-
-// app.get('/api/questions',
-//     passport.authenticate('bearer', {session: false}),
-//     (req, res) => {
-//         Question
-//         .find()
-//         .exec()
-//         .then( question => {
-//             res.json(question);
-//         })
-//         .catch(err => console.log(err));
-//     });
 
 app.get('/api/auth/logout', (req, res) => {
     req.logout();
