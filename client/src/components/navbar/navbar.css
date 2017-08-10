@@ -27,11 +27,11 @@ li:last-child {
     float: right;
 }*/
 body {
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .navbar {
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .navbar-left,  {
