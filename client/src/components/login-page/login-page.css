@@ -9,38 +9,33 @@
   text-align: center;
   vertical-align: middle;*/
   position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 47%;
-    margin: auto;
-    margin-top: 70px;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 49%;
+  margin: auto;
+  margin-top: 70px;
 }
 
 .loginPage img {
-  margin-right: 5px
+  margin-right: 2px;
+  margin-left: 2px;
   /*flex-grow: 1;*/
 }
 
 .loginForm {
-  border: 1px solid black;
+  /*padding-left: 5px;
+  margin-right: 5px;*/
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
   flex: 1;
   margin: 10px;
-  width: 160px;
+  width: 200px;
   height: 450px;
   justify-content: space-around;
   text-align: center;
-  margin-right:5px;
-}
-
-.loginForm a {
-  font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
-  margin-top: 25px;
-  display: block;
-  color: black;
-  /*margin-left: 5px;
-  margin-right: 5px;*/
+  margin-right: 5px;
 }
 
 input {
@@ -48,7 +43,7 @@ input {
   width: 90%;
 }
 
-button {
+.login {
   margin: 15px;
   padding: 8px 12px;
   border: none;
@@ -57,4 +52,22 @@ button {
   text-transform: uppercase;
   letter-spacing: .09em;
   border-radius: 2px;
+}
+
+h4 {
+  font-family: 'Lato', 'Helvetica', 'Arial', sans-serif;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  display: block;
+  color: black;
+  text-transform: uppercase;
+}
+
+a img {
+  margin-top: 55px
+}
+
+p {
+  margin-top: 115px;
+  font-size: 12px;
 }
