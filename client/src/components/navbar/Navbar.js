@@ -17,9 +17,9 @@ export class Navbar extends Component {
       points = 'pts';
     }
 
-    let userName = (props.currentUser) ? (
+    let userName = (this.props.currentUser) ? (
       <div className='user'>
-        <p>{props.currentUser.displayName}</p>
+        <p>{this.props.currentUser.displayName}</p>
       </div>
 
   ) : null;
