@@ -17,13 +17,19 @@ export class Navbar extends Component {
       points = 'pts';
     }
     return (
-      <nav className='navbar' >
-        <ul>
-          <li className='question-no'>Question # {this.props.questionCount}</li>
-          <li className='score'>Score: {this.props.score}</li>
-          <li className='logout'><a href={'/api/auth/logout'}>Logout</a></li>
+      <nav className={'navbar navbar-inverse'} >
+        <div className={'container-fluid'}>
+          <div className={'navbar-header'} >
+        </div>
+        <ul className={'nav navbar-nav'} >
+          <li className={'label label-primary'}>Question # {this.props.questionCount}</li>
+          <li className={'label label-primary score'}>Score: {this.props.score}</li>
         </ul>
-      </nav>
+        <ul className={'nav navbar-nav navbar-right'}>
+          <li className={'label label-primary'}><a href={'/api/auth/logout'}>{'logout'}</a></li>
+        </ul>
+      </div>
+      </nav> 
     );
   }
 }
@@ -35,22 +41,13 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(Navbar);
 
-{/* <nav className={'navbar navbar-inverse'} >
-  <div className={'container'}>
-    <div className={'navbar-header'} />
-  </div>
-  <form className={'navbar-form navbar-left question'}>
-    <div className={'form-group'}>
-      <h3><span className={'label label-primary'}>Question # {this.props.questionCount}</span></h3>
-    </div>
 
-    <div className={'form-group'}>
-      <h3><span className={'label label-primary score'}>Score: {this.props.score} {points}</span></h3>
-    </div>
-  </form>
-  <form className={'navbar-form navbar-right logout'}>
-    <div className={'form-group'}>
-      <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
-    </div>
-    </form>
+
+
+{/* <nav className='navbar' >
+  <ul>
+    <li className='question-no'>Question # {this.props.questionCount}</li>
+    <li className='score'>Score: {this.props.score}</li>
+    <li className='logout'><a href={'/api/auth/logout'}>Logout</a></li>
+  </ul>
 </nav> */}
