@@ -17,13 +17,6 @@ export class Navbar extends Component {
       points = 'pts';
     }
 
-    let userName = (this.props.currentUser) ? (
-      <div className='user'>
-        <p>{this.props.currentUser.displayName}</p>
-      </div>
-
-  ) : null;
-
     return (
 
       <nav className={'navbar navbar-default'}>
@@ -36,7 +29,6 @@ export class Navbar extends Component {
           <li className={'score'}><span className='glyphicon glyphicon-dashboard'> {this.props.score} {points}</span></li>
         </ul>
         <ul className={'nav navbar-nav navbar-right'}>
-          <li className={'name'}>Hi, {userName}!</li>
           <li className='logout'><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'> {'Logout'}</span></a></li>
         </ul>
 
@@ -49,8 +41,7 @@ export class Navbar extends Component {
 
 const mapStateToProps = (state) => ({
   score: state.score,
-  questionCount: state.questionCount,
-  currentUser: state.currentUser
+  questionCount: state.questionCount
 });
 
 export default connect(mapStateToProps)(Navbar);
