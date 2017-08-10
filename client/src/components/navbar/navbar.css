@@ -26,8 +26,12 @@ li a {
 li:last-child {
     float: right;
 }*/
+body {
+  max-width: 1200px;
+}
+
 .navbar {
-  width: 100%;
+  max-width: 1200px;
 }
 
 .navbar-left,  {
