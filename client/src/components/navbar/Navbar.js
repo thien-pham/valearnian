@@ -24,16 +24,16 @@ export class Navbar extends Component {
         </div> */}
         <form className={'navbar-form navbar-left question'}>
           <div className={'form-group'}>
-            <h3><span className={'label label-primary'}>Question # {this.props.questionCount}</span></h3>
+            <h3><span className={'label label-default'}>Question # {this.props.questionCount}</span></h3>
           </div>
 
           <div className={'form-group'}>
-            <h3><span className={'label label-primary score'}>Score: {this.props.score} {points}</span></h3>
+            <h3><span className={'label label-default score'}>Score: {this.props.score} {points}</span></h3>
           </div>
         </form>
         <form className={'navbar-form navbar-right logout'}>
           <div className={'form-group'}>
-            <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
+            <a href={'/api/auth/logout'}><h3><span className={'label label-default'}>{'logout'}</span></h3></a>
           </div>
           </form>
         </div>
