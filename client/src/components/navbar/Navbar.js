@@ -17,6 +17,7 @@ export class Navbar extends Component {
       points = 'pts';
     }
     return (
+      <div className='nav'>
       <nav className={'navbar navbar-inverse'} >
         <div className={'container-fluid'}>
           <div className={'navbar-header'} />
@@ -36,7 +37,7 @@ export class Navbar extends Component {
           </div>
           </form>
       </nav>
-
+</div>
     );
   }
 }
