@@ -18,18 +18,18 @@ export class Navbar extends Component {
     }
     return (
 
-      <nav class='navbar navbar-default'>
-        <div class='container-fluid'>
-
-        <ul className='nav navbar-nav'>
+      <nav className={'navbar navbar-inverse'}>
+        <div className={'container-fluid'}>
+      <div className={'navbar-header'}>
+        <a href={'#'}>VALEARNIAN</a>
+      </div>
+        <ul className={'nav navbar-nav'}>
           <li>Question #{this.props.questionCount}</li>
           <li>Score: {this.props.score}</li>
         </ul>
-        <form className={'navbar-form navbar-right logout'}>
-          <div className={'form-group'}>
-            <a href={'/api/auth/logout'}><h3><span className={'label label-default'}>{'logout'}</span></h3></a>
-          </div>
-          </form>
+        <ul className={'nav navbar-nav navbar-right'}>
+          <li><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'>{'Logout'}</span></a></li>
+        </ul>
 
       </div>
       </nav>
