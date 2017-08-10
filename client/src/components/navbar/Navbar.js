@@ -18,25 +18,20 @@ export class Navbar extends Component {
     }
     return (
 
-      <nav className={'navbar navbar-inverse'} >
-        <div className={'container-fluid'}>
-          {/* <div className={'navbar-header'} >
-        </div> */}
-        <form className={'navbar-form navbar-left question'}>
-          <div className={'form-group'}>
-            <h3><span className={'label label-default'}>Question # {this.props.questionCount}</span></h3>
-          </div>
+      <nav class='navbar navbar-default'>
+        <div class='container-fluid'>
 
-          <div className={'form-group'}>
-            <h3><span className={'label label-default score'}>Score: {this.props.score} {points}</span></h3>
-          </div>
-        </form>
+        <ul className='nav navbar-nav'>
+          <li>Question #{this.props.questionCount}</li>
+          <li>Score: {this.props.score}</li>
+        </ul>
         <form className={'navbar-form navbar-right logout'}>
           <div className={'form-group'}>
             <a href={'/api/auth/logout'}><h3><span className={'label label-default'}>{'logout'}</span></h3></a>
           </div>
           </form>
-        </div>
+      
+      </div>
       </nav>
 
     );
@@ -53,10 +48,21 @@ export default connect(mapStateToProps)(Navbar);
 
 
 
-{/* <nav className='navbar' >
-  <ul>
-    <li className='question-no'>Question # {this.props.questionCount}</li>
-    <li className='score'>Score: {this.props.score}</li>
-    <li className='logout'><a href={'/api/auth/logout'}>Logout</a></li>
-  </ul>
-</nav> */}
+
+<nav className={'navbar navbar-inverse'} >
+  <div className={'container-fluid'}>
+  <form className={'navbar-form navbar-left question'}>
+    <div className={'form-group'}>
+      <h3><span className={'label label-default'}>Question # {this.props.questionCount}</span></h3>
+    </div>
+    <div className={'form-group'}>
+      <h3><span className={'label label-default score'}>Score: {this.props.score} {points}</span></h3>
+    </div>
+  </form>
+  <form className={'navbar-form navbar-right logout'}>
+    <div className={'form-group'}>
+      <a href={'/api/auth/logout'}><h3><span className={'label label-default'}>{'logout'}</span></h3></a>
+    </div>
+    </form>
+  </div>
+</nav>
