@@ -24,8 +24,8 @@ export class Navbar extends Component {
         <a href={'#'}>VALEARNIAN</a>
       </div>
         <ul className={'nav navbar-nav'}>
-          <li>Question #{this.props.questionCount}</li>
-          <li>Score: {this.props.score}</li>
+          <li className={'label label-default'}>Question #{this.props.questionCount}</li>
+          <li className={'label label-default'}>Score: {this.props.score}</li>
         </ul>
         <ul className={'nav navbar-nav navbar-right'}>
           <li><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'>{'Logout'}</span></a></li>
