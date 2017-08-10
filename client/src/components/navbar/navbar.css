@@ -1,3 +1,27 @@
+/*<nav className={'navbar navbar-inverse'}>
+  <div className={'container-fluid heading'}>
+<div className={'navbar-header'}>
+  <a href={'#'}>VALEARNIAN</a>
+</div>
+  <ul className={'nav navbar-nav'}>
+    <li className={'label label-default question'}>Question # {this.props.questionCount}</li>
+    <li className={'label label-default score'}>Score: {this.props.score} {points}</li>
+  </ul>
+  <ul className={'nav navbar-nav navbar-right'}>
+    <li><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'>{'Logout'}</span></a></li>
+  </ul>
+
+</div>
+</nav>*/
+
+.heading {
+  margin-top: 5px;
+}
+
+.question, .score {
+  margin: 5px;
+}
+
 /*nav {
   max-width: 1200px;
   margin: auto;
@@ -36,7 +60,7 @@ li:last-child {
   width: 100%;
 }*/
 
-.navbar-left,  {
+/*.navbar-left,  {
   margin-top: 0;
 }
 
@@ -46,4 +70,4 @@ li:last-child {
 
 .score {
   margin-left: 44px!important;
-}
+}*/
