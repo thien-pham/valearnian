@@ -21,7 +21,7 @@ export class Navbar extends Component {
       <nav className={'navbar navbar-inverse'}>
         <div className={'container-fluid heading'}>
       <div className={'navbar-header'}>
-        <a href={'#'}>VALEARNIAN</a>
+        <h2>VALEARNIAN</h2>
       </div>
         <ul className={'nav navbar-nav'}>
           <li className={'label label-default question'}>Question # {this.props.questionCount}</li>
