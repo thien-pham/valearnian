@@ -2,7 +2,7 @@ import React from 'react';
 import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
 import QuestionPage from './question-page/question-page';
-import Login from './login-page/Login';
+import LoginPage from './login-page/login-page';
 import { fetchUser } from '../actions';
 
 class App extends React.Component {
@@ -20,7 +20,7 @@ class App extends React.Component {
 
   render () {
     if (!this.props.currentUser) {
-      return <Login />;
+      return <LoginPage />;
     }
     return <QuestionPage />;
   }
