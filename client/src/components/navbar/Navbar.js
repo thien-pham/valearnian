@@ -26,12 +26,11 @@ export class Navbar extends Component {
       </div>
         <ul className={'nav navbar-nav'}>
           <li className={'question'}><span className='glyphicon glyphicon-question-sign'> {this.props.questionCount}</span></li>
-          <li className={'score'}><span className='glyphicon glyphicon-dashboard'> {this.props.score} {points}</span></li>
+          <li className={'score'}><span className='glyphicon glyphicon-dashboard'> {this.props.score}{points}</span></li>
         </ul>
         <ul className={'nav navbar-nav navbar-right'}>
           <li className='logout'><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'> {'Logout'}</span></a></li>
         </ul>
-
       </div>
       </nav>
 
