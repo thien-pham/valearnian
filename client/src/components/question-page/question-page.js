@@ -32,9 +32,6 @@ export class QuestionPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('NEXTPROPS', nextProps);
-    // if(nextProps.questions !== this.props.questions) {
-    //
-    // }
       if (nextProps.questions.length) {
         nextProps.questions.forEach((question, index) => {
           this.state.queue.push(index, question);
@@ -107,19 +104,19 @@ export class QuestionPage extends React.Component {
         this.state.questionsQueue.push(this.props.questions[i]);
       }
     }
-    // if (this.state.index === this.props.questions.length) {
-    //   return <div className="restartMsg">
-    //     <div className="card" >
-    //       <img className="image" src={require('./dragons.jpg')} width='150' role="presentation"/>
-    //       <div className="container2">
-    //         <h4>Daoruni gimi, <strike>Ionos Sonaro</strike> {this.state.name}.</h4>
-    //         <button className="newGame" type="submit"
-    //           onClick={e => this.newGame(e)}>Restart?</button>
-    //         <button onClick={'/api/auth/logout'}>logout</button>
-    //         <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
-    //     </div>
-    //   </div>
-    // </div>
+    if (this.state.index === this.props.questions.length) {
+      return <div className="restartMsg">
+        <div className="card" >
+          <img className="image" src={require('./dragons.jpg')} width='150' role="presentation"/>
+          <div className="container2">
+            <h4>Daoruni gimi, <strike>Ionos Sonaro</strike> {this.state.name}.</h4>
+            <button className="newGame" type="submit"
+              onClick={e => this.newGame(e)}>Restart?</button>
+            <button onClick={'/api/auth/logout'}>logout</button>
+            <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
+        </div>
+      </div>
+    </div>
 
     }
     // console.log('APPSTATE', this.state.questionsQueue)
