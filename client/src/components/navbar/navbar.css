@@ -15,7 +15,7 @@
 </nav>*/
 
 .heading {
-  margin-top: 13px;
+  margin-top: 10px;
 }
 
 h2 {
@@ -31,7 +31,8 @@ h2 {
 }
 .logout {
   font-family: sans-serif;
-  font-size: 16px
+  font-size: 16px;
+  font-weight: bold;
 }
 /*nav {
   max-width: 1200px;
