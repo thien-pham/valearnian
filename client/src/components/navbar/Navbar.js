@@ -30,7 +30,7 @@ export class Navbar extends Component {
             <a href={'/api/auth/logout'}><h3><span className={'label label-default'}>{'logout'}</span></h3></a>
           </div>
           </form>
-      
+
       </div>
       </nav>
 
@@ -49,7 +49,7 @@ export default connect(mapStateToProps)(Navbar);
 
 
 
-<nav className={'navbar navbar-inverse'} >
+{/* <nav className={'navbar navbar-inverse'} >
   <div className={'container-fluid'}>
   <form className={'navbar-form navbar-left question'}>
     <div className={'form-group'}>
@@ -65,4 +65,4 @@ export default connect(mapStateToProps)(Navbar);
     </div>
     </form>
   </div>
-</nav>
+</nav> */}
