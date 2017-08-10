@@ -17,11 +17,11 @@ export class Navbar extends Component {
       points = 'pts';
     }
     return (
-      <div className='nav'>
+
       <nav className={'navbar navbar-inverse'} >
         <div className={'container-fluid'}>
-          <div className={'navbar-header'} />
-        </div>
+          {/* <div className={'navbar-header'} >
+        </div> */}
         <form className={'navbar-form navbar-left question'}>
           <div className={'form-group'}>
             <h3><span className={'label label-primary'}>Question # {this.props.questionCount}</span></h3>
@@ -36,8 +36,9 @@ export class Navbar extends Component {
             <a href={'/api/auth/logout'}><h3><span className={'label label-danger'}>{'logout'}</span></h3></a>
           </div>
           </form>
+        </div>
       </nav>
-</div>
+
     );
   }
 }
