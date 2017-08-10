@@ -28,7 +28,7 @@ export class Navbar extends Component {
           <li className={'label label-default score'}>Score: {this.props.score} {points}</li>
         </ul>
         <ul className={'nav navbar-nav navbar-right'}>
-          <li><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'>{'Logout'}</span></a></li>
+          <li className='logout'><a href={'/api/auth/logout'}><span className='glyphicon glyphicon-log-out'>{'Logout'}</span></a></li>
         </ul>
 
       </div>
