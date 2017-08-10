@@ -25,6 +25,9 @@ h2 {
 .question, .score {
   margin: 10px;
   font-size: 20px;
+  color: gray;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
 }
 .logout {
   font-family: sans-serif;
