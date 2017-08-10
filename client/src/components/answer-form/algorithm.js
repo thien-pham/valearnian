@@ -7,7 +7,7 @@ function createNode (data = null, status = null, next = null, prev = null) {
   };
 }
 
-class Queue {
+export default class Queue {
   constructor () {
     this.first = null;
     this.last = null;
@@ -42,19 +42,24 @@ class Queue {
 
     return node.data;
   }
-}
 
-function requeue (queue, data) {
-  const node = createNode(data);
-  if (queue.last) {
-    node.next = queue.last;
-    queue.last.prev = node;
-  }
-  queue.last = node;
-  if (queue.first === null) {
-    queue.first = node;
-    node.data.prev = null;
-  }
+  requeue () {
+    if(this.first === null) {
+      return;
+    }
+
+    const node = this.first;
+    this.first = node.prev;
+
+    if(node === this.last) {
+      this.last === null;
+    }
+
+    this.last.prev = node;
+    this.last = node;
+    this.last.prev = null;
+
+    return node.data;
 }
 
 function runqueue (queue) {
