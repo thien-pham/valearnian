@@ -16,13 +16,14 @@
 
 .heading {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 h2 {
   font-size: 18px;
   color: #DCDCDC
 }
-.question, .score {
+.question, .score, .name {
   margin: 10px;
   font-size: 20px;
   color: gray;
