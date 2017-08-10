@@ -18,7 +18,7 @@ export class Navbar extends Component {
     }
     return (
 
-      <nav className={'navbar navbar-inverse'}>
+      <nav className={'navbar navbar-default'}>
         <div className={'container-fluid heading'}>
       <div className={'navbar-header'}>
         <h2>VALEARNIAN</h2>
