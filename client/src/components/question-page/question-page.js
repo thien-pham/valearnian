@@ -13,7 +13,7 @@ export class QuestionPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      linkedlist: new LinkedList();
+      linkedlist: new LinkedList(),
       index: 0,
       name: null,
       message: ''
