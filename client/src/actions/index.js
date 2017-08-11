@@ -27,7 +27,7 @@ export const fetchUserFailure = error => ({
   error });
 
 export const NEXT_QUESTION = 'NEXT_QUESTION';
-export const nextQuestion = (questionCount) => ({
+export const nextQuestion = (count) => ({
   type: NEXT_QUESTION,
   count
 });
