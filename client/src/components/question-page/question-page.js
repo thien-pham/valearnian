@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Navbar from '../navbar/Navbar';
 import LinkedList from '../linkedList';
 // import QuestionsQueue from './questions-queue';
-import { fetchQuestion, fetchQuestionIndex, makeGuess, incrementScore, newGame, incrementQuestion } from '../../actions';
+import { fetchQuestion, fetchQuestionIndex, makeGuess, incrementScore, nextQuestion, incrementQuestion } from '../../actions';
 import './question-page.css'
 import Modal from '../modal/modal';
 
@@ -37,7 +37,7 @@ export class QuestionPage extends React.Component {
     submitGuess (e) {
       e.preventDefault();
       let ll = this.state.linkedlist;
-      let currentQuestion = linkedlist.get(0).question;
+      let currentQuestion = ll.get(0).question;
       const value = this.input.value;
       this.input.value = '';
 
