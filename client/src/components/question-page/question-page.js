@@ -69,7 +69,7 @@ export class QuestionPage extends React.Component {
               <div className="card" >
                 <img className="image" src={require('./dragons.jpg')} width='150' role="presentation"/>
                 <div className="container2">
-                  {this.state.ll.get(this.props.currentQuestion).question}
+                  {this.state.linkedlist.get(this.props.currentQuestion).question}
                 </div>
               </div>
             </ul>
