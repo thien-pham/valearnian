@@ -35,20 +35,20 @@ passport.use(
     },
     (accessToken, refreshToken, profile, cb) => {
         return User
-            .findOne({googleId: profile.id})
-            .exec()
-            .then(user => {
-                if (user) {
-                    return User.findByIdAndUpdate(user._id, {$set: {accessToken}}, {new: true})
-                }
-                return User.create({
-                    googleId: profile.id,
-                    accessToken,
-                    name: profile.displayName
-                })
-            })
-            .then(user => cb(null, {googleId: user.googleId, accessToken: user.accessToken}))
-            .catch(err => console.error(err))
+          .findOne({googleId: profile.id})
+          .exec()
+          .then(user => {
+              if (user) {
+                  return User.findByIdAndUpdate(user._id, {$set: {accessToken}}, {new: true})
+              }
+              return User.create({
+                googleId: profile.id,
+                accessToken,
+                name: profile.displayName
+              })
+          })
+          .then(user => cb(null, {googleId: user.googleId, accessToken: user.accessToken}))
+          .catch(err => console.error(err))
     }
 ));
 
@@ -69,14 +69,6 @@ passport.use(
 );
 
 // Authentication endpoints
-app.get('/api/me',
-    passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json({
-        googleId: req.user.googleId,
-        name: req.user.name
-    })
-);
-
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
@@ -98,17 +90,14 @@ app.get('/api/auth/logout', (req, res) => {
 });
 
 //API endpoints
-// app.get('/api/questions',
-//   passport.authenticate('bearer', {session: false}),
-//   (req, res) => {
-//     Questions
-//       .find({}, (err, question) => {
-//         if(err) {
-//           res.send(err);
-//         }
-//         res.json(question);
-//       });
-// });
+app.get('/api/me',
+    passport.authenticate('bearer', {session: false}),
+    (req, res) => res.json({
+        googleId: req.user.googleId,
+        name: req.user.name
+    })
+);
+
 app.get('/api/questions',
   passport.authenticate('bearer', {session: false}),
   (req, res) => {
@@ -124,49 +113,9 @@ app.get('/api/questions',
       });
 });
 
-// app.get('/api/users/:accessToken', (req, res) => {
-//   User
-//     .findOne({accessToken: req.params.accessToken})
-//     .then(user =>{
-//       console.log(user);
-//       return res.json(user);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({error: "Something's gone terribly awry"});
-//     });
-// });
-
-// app.get('/api/questions/:userId',
-//   passport.authenticate('bearer', {session: false}),
-//     (req, res) => {
-//         let userId = req.params.userId;
-//         User.find({_id: userId},
-//           (err, user) => {
-//             if (err) {
-//               return console.error(err);
-//             }
-//             const word = req.user.questions[0];
-//             return res.json({})
-//             }
-//         );
-//
-//         const getQuestion = (userInfo) => {
-//             let result = userInfo.questions[0].questionId;
-//             Questions.findOne({_id: questionId},
-//               (err, question) => {
-//                 if (err) {
-//                   return res.send(err);
-//                 }
-//                 return res.json({question, result});
-//             });
-//         }
-//     });
-
-
-
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 // Unhandled requests which aren't for the API should serve index.html so
 // client-side routing using browserHistory can function
 app.get(/^(?!\/api(\/|$))/, (req, res) => {

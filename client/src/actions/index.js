@@ -26,6 +26,12 @@ export const fetchUserFailure = error => ({
   type: FETCH_USER_FAILURE,
   error });
 
+export const NEXT_QUESTION = 'NEXT_QUESTION';
+export const nextQuestion = (questionCount) => ({
+  type: NEXT_QUESTION,
+  questionCount
+});
+
 export const FETCH_SCORE = 'FETCH_SCORE';
 export const fetchScore = () => ({
   type: FETCH_SCORE });
@@ -38,15 +44,6 @@ export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
 export const fetchQuestionNumber = () => ({
   type: FETCH_QUESTION_NUMBER });
 
-// export const CREATE_USER = 'CREATE_USER';
-// export const createUser = (currentUser) => ({
-//   type: CREATE_USER, currentUser });
-
-export const MAKE_GUESS = 'MAKE_GUESS';
-export const makeGuess = (guess) => ({
-  type: MAKE_GUESS,
-  guess });
-
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const incrementScore = () => ({
   type: INCREMENT_SCORE });
@@ -55,24 +52,6 @@ export const INCREMENT_QUESTION = 'INCREMENT_QUESTION';
 export const incrementQuestion = () => ({
   type: INCREMENT_QUESTION });
 
-export const ENQUEUE = 'ENQUEUE';
-export const enqueue = () => ({
-  type: ENQUEUE });
-
-export const DEQUEUE = 'DEQUEUE';
-export const dequeue = () => ({
-  type: DEQUEUE });
-
-export const REQUEUE = 'REQUEUE';
-export const requeue = () => ({
-  type: REQUEUE });
-
-export const FILL_UP_QUEUE = 'FILL_UP_QUEUE';
-export const fillUpQueue = (array) => ({
-  type: FILL_UP_QUEUE,
-  array
-});
-
 export const score = () => dispatch => {
   dispatch(fetchScore);
 };
@@ -80,11 +59,6 @@ export const score = () => dispatch => {
 export const questionNumber = () => dispatch => {
   dispatch(fetchQuestionNumber);
 };
-
-// export const NEW_GAME = 'NEW_GAME';
-// export const newGame = () => ({
-//     type: NEW_GAME
-// });
 
 export const fetchQuestion = () => (dispatch) => {
   dispatch(fetchQuestionRequest());
