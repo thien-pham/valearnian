@@ -26,11 +26,11 @@ export class QuestionPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('NEXTPROPS', nextProps);
-      if (nextProps.questions.length && this.state.ll.length === 0) {
+      if (nextProps.questions.length && this.state.linkedlist.length === 0) {
         nextProps.questions.forEach((question, index) => {
-          this.state.ll.insert(index, question);
+          this.state.linkedlist.insert(index, question);
         });
-        return this.state.ll;
+        return this.state.linkedlist;
       }
     }
 
