@@ -5,13 +5,11 @@ import {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
-  //FETCH_SCORE,
   FETCH_QUESTION_INDEX,
   INCREMENT_SCORE,
   INCREMENT_QUESTION,
   NEXT_QUESTION
-} from '../actions';
-// import Queue from './algorithm';
+} from '../actions'
 
 const initialState = {
   questions: [],
@@ -19,7 +17,8 @@ const initialState = {
   loading: false,
   error: null,
   currentQuestion: 0,
-  score: 0
+  score: 0,
+  questionCount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -62,16 +61,6 @@ const reducer = (state = initialState, action) => {
       error: null,
       currentUser: action.currentUser
     };
-//   case FETCH_SCORE:
-//     return {
-//       ...state,
-//       currentScore: action.currentScore
-//     };
-//   case FETCH_QUESTION_NUMBER:
-//     return {
-//       ...state,
-//       questionNumber: action.questionNumber
-
   case INCREMENT_SCORE:
     return {
       ...state,
@@ -90,7 +79,7 @@ const reducer = (state = initialState, action) => {
   case NEXT_QUESTION:
     return {
       ...state,
-      currentQuestion: action.questionCount
+      currentQuestion: action.count
     }
   default:
     return state;

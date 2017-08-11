@@ -1,11 +1,9 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 import { connect } from 'react-redux';
-// import AnswerForm from '../answer-form/answer-form';
 import Navbar from '../navbar/Navbar';
 import LinkedList from '../linkedList';
-// import QuestionsQueue from './questions-queue';
-import { fetchQuestion, fetchQuestionIndex, makeGuess, incrementScore, nextQuestion, incrementQuestion } from '../../actions';
+import { fetchQuestion, incrementScore, nextQuestion, incrementQuestion } from '../../actions';
 import './question-page.css'
 import Modal from '../modal/modal';
 
@@ -42,10 +40,12 @@ export class QuestionPage extends React.Component {
       this.input.value = '';
 
       if (value.toLowerCase() === ll.get(this.state.index).answer.toLowerCase()) {
+        this.setState({message: 'Rijes aot!'});
         ll.insert(ll.length, ll.get(this.state.index));
         //increment score
         this.props.dispatch(incrementScore());
       } else {
+        this.setState({message: 'Daoruni gimi.'});
         ll.insert(this.state.index + 3, ll.get(this.state.index));
       }
       this.props.dispatch(incrementQuestion());
@@ -87,8 +87,7 @@ export class QuestionPage extends React.Component {
 const mapStateToProps = (state) => ({
   questions: state.questions,
   score: state.score,
-  currentQuestion: state.currentQuestion,
-  questionIndex: state.questionIndex
+  currentQuestion: state.currentQuestion
 });
 
 export default connect(mapStateToProps)(QuestionPage);

@@ -29,20 +29,8 @@ export const fetchUserFailure = error => ({
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const nextQuestion = (questionCount) => ({
   type: NEXT_QUESTION,
-  questionCount
+  count
 });
-
-export const FETCH_SCORE = 'FETCH_SCORE';
-export const fetchScore = () => ({
-  type: FETCH_SCORE });
-
-export const FETCH_QUESTION_INDEX = 'FETCH_QUESTION_INDEX';
-export const fetchQuestionIndex = () => ({
-  type: FETCH_QUESTION_INDEX });
-
-export const FETCH_QUESTION_NUMBER = 'FETCH_QUESTION_NUMBER';
-export const fetchQuestionNumber = () => ({
-  type: FETCH_QUESTION_NUMBER });
 
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const incrementScore = () => ({
@@ -51,14 +39,6 @@ export const incrementScore = () => ({
 export const INCREMENT_QUESTION = 'INCREMENT_QUESTION';
 export const incrementQuestion = () => ({
   type: INCREMENT_QUESTION });
-
-export const score = () => dispatch => {
-  dispatch(fetchScore);
-};
-
-export const questionNumber = () => dispatch => {
-  dispatch(fetchQuestionNumber);
-};
 
 export const fetchQuestion = () => (dispatch) => {
   dispatch(fetchQuestionRequest());

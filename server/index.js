@@ -22,8 +22,6 @@ const app = express();
 const {DATABASE_URL, PORT} = require('./config');
 const { User, Question } = require('./models');
 
-// app.use(mainRoutes);
-// app.use(jsonParser);
 app.use(passport.initialize());
 app.use(bodyParser.json());
 

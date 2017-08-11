@@ -8,7 +8,7 @@ h2 {
   color: #DCDCDC
 }
 
-.question, .score, .name {
+.question, .score, .name, .logout {
   padding: 5px;
   margin: 10px;
   font-size: 18px;
@@ -17,8 +17,7 @@ h2 {
   border-radius: 3px;
 }
 
-.logout {
-  /*font-family: sans-serif;*/
+/*.logout {
   font-size: 18px;
   font-weight: bold;
-}
+}*/
