@@ -5,31 +5,20 @@ import {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
-  //FETCH_SCORE,
   FETCH_QUESTION_INDEX,
-  CREATE_USER,
-  MAKE_GUESS,
   INCREMENT_SCORE,
   INCREMENT_QUESTION,
-  // DEQUEUE,
-  // REQUEUE,
-  // ENQUEUE,
-  FILL_UP_QUEUE,
-  NEW_GAME
-} from '../actions';
-// import Queue from './algorithm';
+  NEXT_QUESTION
+} from '../actions'
 
 const initialState = {
   questions: [],
   currentUser: null,
   loading: false,
   error: null,
-  queueA: [],
-  queueB: [],
-  questionCount: 1,
-  questionIndex: 0,
-  guesses: [],
-  score: 0
+  currentQuestion: 0,
+  score: 0,
+  questionCount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,24 +42,6 @@ const reducer = (state = initialState, action) => {
       error: null,
       questions: action.questions
     };
-  // case FETCH_QUESTION_SUCCESS:
-  //   let q = [];
-  //   let a = [];
-  //   for (let i=0; i<action.questions.length; i++) {
-  //     q.push(action.questions[i].question);
-  //     a.push(action.questions[i].answer);
-  //   }
-  //   return Object.assign({}, state, {
-  //     loading: false,
-  //     error: null,
-  //     questions: q,
-  //     answers: a
-  //   });
-  // case CREATE_USER:
-  //   return {
-  //     ...state,
-  //     currentUser: action.currentUser
-  //   };
   case FETCH_USER_REQUEST:
     return {
       ...state,
@@ -90,21 +61,6 @@ const reducer = (state = initialState, action) => {
       error: null,
       currentUser: action.currentUser
     };
-//   case FETCH_SCORE:
-//     return {
-//       ...state,
-//       currentScore: action.currentScore
-//     };
-//   case FETCH_QUESTION_NUMBER:
-//     return {
-//       ...state,
-//       questionNumber: action.questionNumber
-
-  case MAKE_GUESS:
-    return {
-      ...state,
-      guesses: state.guesses.concat(action.guess)
-    };
   case INCREMENT_SCORE:
     return {
       ...state,
@@ -120,31 +76,11 @@ const reducer = (state = initialState, action) => {
       ...state,
       questionIndex: state.questionIndex + 1
     };
-  // case DEQUEUE:
-  //   return {
-  //     ...state,
-  //     queueA: Queue.queueA.dequeue()
-  //   };
-  // case REQUEUE:
-  //   return {
-  //     ...state,
-  //     queueB: Queue.queueB
-  //   };
-  // case ENQUEUE:
-  //   return {
-  //     ...state,
-  //     queueA: Queue.queueA.enqueue(state.questions[state.questionIndex])
-  //   };
-  case FILL_UP_QUEUE:
-    return [
-      ...state, {
-        questions: action.array
-      }
-    ];
-  // case NEW_GAME:
-  //   return {
-  //     initialState
-  //     };
+  case NEXT_QUESTION:
+    return {
+      ...state,
+      currentQuestion: action.count
+    }
   default:
     return state;
   }
